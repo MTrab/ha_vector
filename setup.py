@@ -25,7 +25,7 @@ setuptools.setup(
     },
     install_requires=[
         "aiogrpc==1.8",
-        "cryptography==37.0.2",
+        "cryptography==36.0.2",
         "flask==2.1.2",
         "googleapis-common-protos==1.56.3",
         "numpy==1.23.0",
