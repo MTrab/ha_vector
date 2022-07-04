@@ -30,7 +30,7 @@ setuptools.setup(
         "googleapis-common-protos==1.56.3",
         "numpy==1.23.0",
         "Pillow==9.2.0",
-        "requests==2.28.1",
+        "requests==2.28.0",
         "grpcio-tools==1.47.0",
     ],
 )
