@@ -31,6 +31,6 @@ setuptools.setup(
         "numpy==1.23.0",
         "Pillow==9.1.1",
         "requests==2.28.0",
-        "grpcio-tools==1.47.0",
+        "grpcio-tools==1.46.1",
     ],
 )
