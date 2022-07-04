@@ -18,7 +18,7 @@ syntax = "proto3";
 
 package Anki.Vector.external_interface;
 
-import "messages.proto";
+import "ha_vector/messaging/messages.proto";
 
 // Tell the behavior stream to release control from the SDK.
 // The stream may stay alive, but Vector will be allowed to run
@@ -32,7 +32,7 @@ message ControlRequest {
   enum Priority {
     // Unknown priority. Used for versions that don't understand old priority levels.
     UNKNOWN = 0;
-    // Highest priority level. Suppresses most automatic physical reactions, use with caution. 
+    // Highest priority level. Suppresses most automatic physical reactions, use with caution.
     OVERRIDE_BEHAVIORS = 10;
     // Normal priority level. Directly under mandatory physical reactions.
     DEFAULT = 20;
@@ -65,7 +65,7 @@ message ControlGrantedResponse {}
 // can be as a result of conditions passed to the original ControlRequest.
 message ControlLostResponse {}
 
-// The ability to reserve control before/after SDK scripts has been lost.  
+// The ability to reserve control before/after SDK scripts has been lost.
 // This control can be regained through another ControlRequest.
 message ReservedControlLostResponse {}
 

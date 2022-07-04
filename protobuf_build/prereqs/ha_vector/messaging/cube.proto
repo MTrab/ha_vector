@@ -18,8 +18,8 @@ syntax = "proto3";
 
 package Anki.Vector.external_interface;
 
-import "messages.proto";
-import "response_status.proto";
+import "ha_vector/messaging/messages.proto";
+import "ha_vector/messaging/response_status.proto";
 
 // Attempt to connect to a cube. If a cube is currently connected,
 // this will do nothing.
@@ -121,7 +121,7 @@ enum ObjectType
   // Light Cube (a.k.a. Active Block)
   //
   BLOCK_LIGHTCUBE1 = 2;
-  
+
   CHARGER_BASIC = 6;
 
   FIRST_CUSTOM_OBJECT_TYPE = 15;

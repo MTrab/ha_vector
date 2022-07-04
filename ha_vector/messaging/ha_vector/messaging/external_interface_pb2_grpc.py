@@ -2,13 +2,11 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import alexa_pb2 as alexa__pb2
-import behavior_pb2 as behavior__pb2
-import cube_pb2 as cube__pb2
-import messages_pb2 as messages__pb2
-import nav_map_pb2 as nav__map__pb2
-import settings_pb2 as settings__pb2
-import shared_pb2 as shared__pb2
+from ha_vector.messaging import behavior_pb2 as ha__vector_dot_messaging_dot_behavior__pb2
+from ha_vector.messaging import cube_pb2 as ha__vector_dot_messaging_dot_cube__pb2
+from ha_vector.messaging import messages_pb2 as ha__vector_dot_messaging_dot_messages__pb2
+from ha_vector.messaging import nav_map_pb2 as ha__vector_dot_messaging_dot_nav__map__pb2
+from ha_vector.messaging import shared_pb2 as ha__vector_dot_messaging_dot_shared__pb2
 
 
 class ExternalInterfaceStub(object):
@@ -23,433 +21,348 @@ class ExternalInterfaceStub(object):
         """
         self.ProtocolVersion = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/ProtocolVersion',
-                request_serializer=shared__pb2.ProtocolVersionRequest.SerializeToString,
-                response_deserializer=shared__pb2.ProtocolVersionResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_shared__pb2.ProtocolVersionRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_shared__pb2.ProtocolVersionResponse.FromString,
                 )
         self.SDKInitialization = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/SDKInitialization',
-                request_serializer=messages__pb2.SDKInitializationRequest.SerializeToString,
-                response_deserializer=messages__pb2.SDKInitializationResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.SDKInitializationRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.SDKInitializationResponse.FromString,
                 )
         self.DriveWheels = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/DriveWheels',
-                request_serializer=messages__pb2.DriveWheelsRequest.SerializeToString,
-                response_deserializer=messages__pb2.DriveWheelsResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.DriveWheelsRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.DriveWheelsResponse.FromString,
                 )
         self.PlayAnimationTrigger = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/PlayAnimationTrigger',
-                request_serializer=messages__pb2.PlayAnimationTriggerRequest.SerializeToString,
-                response_deserializer=messages__pb2.PlayAnimationResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.PlayAnimationTriggerRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.PlayAnimationResponse.FromString,
                 )
         self.PlayAnimation = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/PlayAnimation',
-                request_serializer=messages__pb2.PlayAnimationRequest.SerializeToString,
-                response_deserializer=messages__pb2.PlayAnimationResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.PlayAnimationRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.PlayAnimationResponse.FromString,
                 )
         self.ListAnimations = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/ListAnimations',
-                request_serializer=messages__pb2.ListAnimationsRequest.SerializeToString,
-                response_deserializer=messages__pb2.ListAnimationsResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.ListAnimationsRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.ListAnimationsResponse.FromString,
                 )
         self.ListAnimationTriggers = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/ListAnimationTriggers',
-                request_serializer=messages__pb2.ListAnimationTriggersRequest.SerializeToString,
-                response_deserializer=messages__pb2.ListAnimationTriggersResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.ListAnimationTriggersRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.ListAnimationTriggersResponse.FromString,
                 )
         self.MoveHead = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/MoveHead',
-                request_serializer=messages__pb2.MoveHeadRequest.SerializeToString,
-                response_deserializer=messages__pb2.MoveHeadResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.MoveHeadRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.MoveHeadResponse.FromString,
                 )
         self.MoveLift = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/MoveLift',
-                request_serializer=messages__pb2.MoveLiftRequest.SerializeToString,
-                response_deserializer=messages__pb2.MoveLiftResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.MoveLiftRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.MoveLiftResponse.FromString,
                 )
         self.StopAllMotors = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/StopAllMotors',
-                request_serializer=messages__pb2.StopAllMotorsRequest.SerializeToString,
-                response_deserializer=messages__pb2.StopAllMotorsResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.StopAllMotorsRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.StopAllMotorsResponse.FromString,
                 )
         self.DisplayFaceImageRGB = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/DisplayFaceImageRGB',
-                request_serializer=messages__pb2.DisplayFaceImageRGBRequest.SerializeToString,
-                response_deserializer=messages__pb2.DisplayFaceImageRGBResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.DisplayFaceImageRGBRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.DisplayFaceImageRGBResponse.FromString,
                 )
         self.EventStream = channel.unary_stream(
                 '/Anki.Vector.external_interface.ExternalInterface/EventStream',
-                request_serializer=shared__pb2.EventRequest.SerializeToString,
-                response_deserializer=shared__pb2.EventResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_shared__pb2.EventRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_shared__pb2.EventResponse.FromString,
                 )
         self.ExternalAudioStreamPlayback = channel.stream_stream(
                 '/Anki.Vector.external_interface.ExternalInterface/ExternalAudioStreamPlayback',
-                request_serializer=messages__pb2.ExternalAudioStreamRequest.SerializeToString,
-                response_deserializer=messages__pb2.ExternalAudioStreamResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.ExternalAudioStreamRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.ExternalAudioStreamResponse.FromString,
                 )
         self.BehaviorControl = channel.stream_stream(
                 '/Anki.Vector.external_interface.ExternalInterface/BehaviorControl',
-                request_serializer=behavior__pb2.BehaviorControlRequest.SerializeToString,
-                response_deserializer=behavior__pb2.BehaviorControlResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_behavior__pb2.BehaviorControlRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_behavior__pb2.BehaviorControlResponse.FromString,
                 )
         self.AssumeBehaviorControl = channel.unary_stream(
                 '/Anki.Vector.external_interface.ExternalInterface/AssumeBehaviorControl',
-                request_serializer=behavior__pb2.BehaviorControlRequest.SerializeToString,
-                response_deserializer=behavior__pb2.BehaviorControlResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_behavior__pb2.BehaviorControlRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_behavior__pb2.BehaviorControlResponse.FromString,
                 )
         self.CancelFaceEnrollment = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/CancelFaceEnrollment',
-                request_serializer=messages__pb2.CancelFaceEnrollmentRequest.SerializeToString,
-                response_deserializer=messages__pb2.CancelFaceEnrollmentResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.CancelFaceEnrollmentRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.CancelFaceEnrollmentResponse.FromString,
                 )
         self.RequestEnrolledNames = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/RequestEnrolledNames',
-                request_serializer=messages__pb2.RequestEnrolledNamesRequest.SerializeToString,
-                response_deserializer=messages__pb2.RequestEnrolledNamesResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.RequestEnrolledNamesRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.RequestEnrolledNamesResponse.FromString,
                 )
         self.UpdateEnrolledFaceByID = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/UpdateEnrolledFaceByID',
-                request_serializer=messages__pb2.UpdateEnrolledFaceByIDRequest.SerializeToString,
-                response_deserializer=messages__pb2.UpdateEnrolledFaceByIDResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.UpdateEnrolledFaceByIDRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.UpdateEnrolledFaceByIDResponse.FromString,
                 )
         self.EraseEnrolledFaceByID = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/EraseEnrolledFaceByID',
-                request_serializer=messages__pb2.EraseEnrolledFaceByIDRequest.SerializeToString,
-                response_deserializer=messages__pb2.EraseEnrolledFaceByIDResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.EraseEnrolledFaceByIDRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.EraseEnrolledFaceByIDResponse.FromString,
                 )
         self.EraseAllEnrolledFaces = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/EraseAllEnrolledFaces',
-                request_serializer=messages__pb2.EraseAllEnrolledFacesRequest.SerializeToString,
-                response_deserializer=messages__pb2.EraseAllEnrolledFacesResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.EraseAllEnrolledFacesRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.EraseAllEnrolledFacesResponse.FromString,
                 )
         self.SetFaceToEnroll = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/SetFaceToEnroll',
-                request_serializer=messages__pb2.SetFaceToEnrollRequest.SerializeToString,
-                response_deserializer=messages__pb2.SetFaceToEnrollResponse.FromString,
-                )
-        self.EnrollFace = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/EnrollFace',
-                request_serializer=messages__pb2.EnrollFaceRequest.SerializeToString,
-                response_deserializer=messages__pb2.EnrollFaceResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.SetFaceToEnrollRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.SetFaceToEnrollResponse.FromString,
                 )
         self.EnableMarkerDetection = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/EnableMarkerDetection',
-                request_serializer=messages__pb2.EnableMarkerDetectionRequest.SerializeToString,
-                response_deserializer=messages__pb2.EnableMarkerDetectionResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.EnableMarkerDetectionRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.EnableMarkerDetectionResponse.FromString,
                 )
         self.EnableFaceDetection = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/EnableFaceDetection',
-                request_serializer=messages__pb2.EnableFaceDetectionRequest.SerializeToString,
-                response_deserializer=messages__pb2.EnableFaceDetectionResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.EnableFaceDetectionRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.EnableFaceDetectionResponse.FromString,
                 )
         self.EnableMotionDetection = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/EnableMotionDetection',
-                request_serializer=messages__pb2.EnableMotionDetectionRequest.SerializeToString,
-                response_deserializer=messages__pb2.EnableMotionDetectionResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.EnableMotionDetectionRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.EnableMotionDetectionResponse.FromString,
                 )
         self.EnableMirrorMode = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/EnableMirrorMode',
-                request_serializer=messages__pb2.EnableMirrorModeRequest.SerializeToString,
-                response_deserializer=messages__pb2.EnableMirrorModeResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.EnableMirrorModeRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.EnableMirrorModeResponse.FromString,
                 )
         self.EnableImageStreaming = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/EnableImageStreaming',
-                request_serializer=messages__pb2.EnableImageStreamingRequest.SerializeToString,
-                response_deserializer=messages__pb2.EnableImageStreamingResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.EnableImageStreamingRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.EnableImageStreamingResponse.FromString,
                 )
         self.IsImageStreamingEnabled = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/IsImageStreamingEnabled',
-                request_serializer=messages__pb2.IsImageStreamingEnabledRequest.SerializeToString,
-                response_deserializer=messages__pb2.IsImageStreamingEnabledResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.IsImageStreamingEnabledRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.IsImageStreamingEnabledResponse.FromString,
                 )
         self.CancelActionByIdTag = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/CancelActionByIdTag',
-                request_serializer=messages__pb2.CancelActionByIdTagRequest.SerializeToString,
-                response_deserializer=messages__pb2.CancelActionByIdTagResponse.FromString,
-                )
-        self.CancelBehavior = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/CancelBehavior',
-                request_serializer=messages__pb2.CancelBehaviorRequest.SerializeToString,
-                response_deserializer=messages__pb2.CancelBehaviorResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.CancelActionByIdTagRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.CancelActionByIdTagResponse.FromString,
                 )
         self.GoToPose = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/GoToPose',
-                request_serializer=messages__pb2.GoToPoseRequest.SerializeToString,
-                response_deserializer=messages__pb2.GoToPoseResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.GoToPoseRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.GoToPoseResponse.FromString,
                 )
         self.DockWithCube = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/DockWithCube',
-                request_serializer=messages__pb2.DockWithCubeRequest.SerializeToString,
-                response_deserializer=messages__pb2.DockWithCubeResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.DockWithCubeRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.DockWithCubeResponse.FromString,
                 )
         self.DriveOffCharger = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/DriveOffCharger',
-                request_serializer=messages__pb2.DriveOffChargerRequest.SerializeToString,
-                response_deserializer=messages__pb2.DriveOffChargerResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.DriveOffChargerRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.DriveOffChargerResponse.FromString,
                 )
         self.DriveOnCharger = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/DriveOnCharger',
-                request_serializer=messages__pb2.DriveOnChargerRequest.SerializeToString,
-                response_deserializer=messages__pb2.DriveOnChargerResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.DriveOnChargerRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.DriveOnChargerResponse.FromString,
                 )
         self.FindFaces = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/FindFaces',
-                request_serializer=messages__pb2.FindFacesRequest.SerializeToString,
-                response_deserializer=messages__pb2.FindFacesResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.FindFacesRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.FindFacesResponse.FromString,
                 )
         self.LookAroundInPlace = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/LookAroundInPlace',
-                request_serializer=messages__pb2.LookAroundInPlaceRequest.SerializeToString,
-                response_deserializer=messages__pb2.LookAroundInPlaceResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.LookAroundInPlaceRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.LookAroundInPlaceResponse.FromString,
                 )
         self.RollBlock = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/RollBlock',
-                request_serializer=messages__pb2.RollBlockRequest.SerializeToString,
-                response_deserializer=messages__pb2.RollBlockResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.RollBlockRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.RollBlockResponse.FromString,
                 )
         self.PhotosInfo = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/PhotosInfo',
-                request_serializer=messages__pb2.PhotosInfoRequest.SerializeToString,
-                response_deserializer=messages__pb2.PhotosInfoResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.PhotosInfoRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.PhotosInfoResponse.FromString,
                 )
         self.Photo = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/Photo',
-                request_serializer=messages__pb2.PhotoRequest.SerializeToString,
-                response_deserializer=messages__pb2.PhotoResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.PhotoRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.PhotoResponse.FromString,
                 )
         self.Thumbnail = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/Thumbnail',
-                request_serializer=messages__pb2.ThumbnailRequest.SerializeToString,
-                response_deserializer=messages__pb2.ThumbnailResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.ThumbnailRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.ThumbnailResponse.FromString,
                 )
         self.DeletePhoto = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/DeletePhoto',
-                request_serializer=messages__pb2.DeletePhotoRequest.SerializeToString,
-                response_deserializer=messages__pb2.DeletePhotoResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.DeletePhotoRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.DeletePhotoResponse.FromString,
                 )
         self.DriveStraight = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/DriveStraight',
-                request_serializer=messages__pb2.DriveStraightRequest.SerializeToString,
-                response_deserializer=messages__pb2.DriveStraightResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.DriveStraightRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.DriveStraightResponse.FromString,
                 )
         self.TurnInPlace = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/TurnInPlace',
-                request_serializer=messages__pb2.TurnInPlaceRequest.SerializeToString,
-                response_deserializer=messages__pb2.TurnInPlaceResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.TurnInPlaceRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.TurnInPlaceResponse.FromString,
                 )
         self.SetHeadAngle = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/SetHeadAngle',
-                request_serializer=messages__pb2.SetHeadAngleRequest.SerializeToString,
-                response_deserializer=messages__pb2.SetHeadAngleResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.SetHeadAngleRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.SetHeadAngleResponse.FromString,
                 )
         self.SetLiftHeight = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/SetLiftHeight',
-                request_serializer=messages__pb2.SetLiftHeightRequest.SerializeToString,
-                response_deserializer=messages__pb2.SetLiftHeightResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.SetLiftHeightRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.SetLiftHeightResponse.FromString,
                 )
         self.TurnTowardsFace = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/TurnTowardsFace',
-                request_serializer=messages__pb2.TurnTowardsFaceRequest.SerializeToString,
-                response_deserializer=messages__pb2.TurnTowardsFaceResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.TurnTowardsFaceRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.TurnTowardsFaceResponse.FromString,
                 )
         self.GoToObject = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/GoToObject',
-                request_serializer=messages__pb2.GoToObjectRequest.SerializeToString,
-                response_deserializer=messages__pb2.GoToObjectResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.GoToObjectRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.GoToObjectResponse.FromString,
                 )
         self.RollObject = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/RollObject',
-                request_serializer=messages__pb2.RollObjectRequest.SerializeToString,
-                response_deserializer=messages__pb2.RollObjectResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.RollObjectRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.RollObjectResponse.FromString,
                 )
         self.PopAWheelie = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/PopAWheelie',
-                request_serializer=messages__pb2.PopAWheelieRequest.SerializeToString,
-                response_deserializer=messages__pb2.PopAWheelieResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.PopAWheelieRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.PopAWheelieResponse.FromString,
                 )
         self.PickupObject = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/PickupObject',
-                request_serializer=messages__pb2.PickupObjectRequest.SerializeToString,
-                response_deserializer=messages__pb2.PickupObjectResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.PickupObjectRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.PickupObjectResponse.FromString,
                 )
         self.PlaceObjectOnGroundHere = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/PlaceObjectOnGroundHere',
-                request_serializer=messages__pb2.PlaceObjectOnGroundHereRequest.SerializeToString,
-                response_deserializer=messages__pb2.PlaceObjectOnGroundHereResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.PlaceObjectOnGroundHereRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.PlaceObjectOnGroundHereResponse.FromString,
                 )
         self.SetMasterVolume = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/SetMasterVolume',
-                request_serializer=messages__pb2.MasterVolumeRequest.SerializeToString,
-                response_deserializer=messages__pb2.MasterVolumeResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.MasterVolumeRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.MasterVolumeResponse.FromString,
                 )
         self.UserAuthentication = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/UserAuthentication',
-                request_serializer=shared__pb2.UserAuthenticationRequest.SerializeToString,
-                response_deserializer=shared__pb2.UserAuthenticationResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_shared__pb2.UserAuthenticationRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_shared__pb2.UserAuthenticationResponse.FromString,
                 )
         self.BatteryState = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/BatteryState',
-                request_serializer=messages__pb2.BatteryStateRequest.SerializeToString,
-                response_deserializer=messages__pb2.BatteryStateResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.BatteryStateRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.BatteryStateResponse.FromString,
                 )
         self.VersionState = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/VersionState',
-                request_serializer=messages__pb2.VersionStateRequest.SerializeToString,
-                response_deserializer=messages__pb2.VersionStateResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.VersionStateRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.VersionStateResponse.FromString,
                 )
         self.SayText = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/SayText',
-                request_serializer=messages__pb2.SayTextRequest.SerializeToString,
-                response_deserializer=messages__pb2.SayTextResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.SayTextRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.SayTextResponse.FromString,
                 )
         self.ConnectCube = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/ConnectCube',
-                request_serializer=cube__pb2.ConnectCubeRequest.SerializeToString,
-                response_deserializer=cube__pb2.ConnectCubeResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_cube__pb2.ConnectCubeRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_cube__pb2.ConnectCubeResponse.FromString,
                 )
         self.DisconnectCube = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/DisconnectCube',
-                request_serializer=cube__pb2.DisconnectCubeRequest.SerializeToString,
-                response_deserializer=cube__pb2.DisconnectCubeResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_cube__pb2.DisconnectCubeRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_cube__pb2.DisconnectCubeResponse.FromString,
                 )
         self.CubesAvailable = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/CubesAvailable',
-                request_serializer=cube__pb2.CubesAvailableRequest.SerializeToString,
-                response_deserializer=cube__pb2.CubesAvailableResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_cube__pb2.CubesAvailableRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_cube__pb2.CubesAvailableResponse.FromString,
                 )
         self.FlashCubeLights = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/FlashCubeLights',
-                request_serializer=cube__pb2.FlashCubeLightsRequest.SerializeToString,
-                response_deserializer=cube__pb2.FlashCubeLightsResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_cube__pb2.FlashCubeLightsRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_cube__pb2.FlashCubeLightsResponse.FromString,
                 )
         self.ForgetPreferredCube = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/ForgetPreferredCube',
-                request_serializer=cube__pb2.ForgetPreferredCubeRequest.SerializeToString,
-                response_deserializer=cube__pb2.ForgetPreferredCubeResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_cube__pb2.ForgetPreferredCubeRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_cube__pb2.ForgetPreferredCubeResponse.FromString,
                 )
         self.SetPreferredCube = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/SetPreferredCube',
-                request_serializer=cube__pb2.SetPreferredCubeRequest.SerializeToString,
-                response_deserializer=cube__pb2.SetPreferredCubeResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_cube__pb2.SetPreferredCubeRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_cube__pb2.SetPreferredCubeResponse.FromString,
                 )
         self.DeleteCustomObjects = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/DeleteCustomObjects',
-                request_serializer=cube__pb2.DeleteCustomObjectsRequest.SerializeToString,
-                response_deserializer=cube__pb2.DeleteCustomObjectsResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_cube__pb2.DeleteCustomObjectsRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_cube__pb2.DeleteCustomObjectsResponse.FromString,
                 )
         self.CreateFixedCustomObject = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/CreateFixedCustomObject',
-                request_serializer=cube__pb2.CreateFixedCustomObjectRequest.SerializeToString,
-                response_deserializer=cube__pb2.CreateFixedCustomObjectResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_cube__pb2.CreateFixedCustomObjectRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_cube__pb2.CreateFixedCustomObjectResponse.FromString,
                 )
         self.DefineCustomObject = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/DefineCustomObject',
-                request_serializer=cube__pb2.DefineCustomObjectRequest.SerializeToString,
-                response_deserializer=cube__pb2.DefineCustomObjectResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_cube__pb2.DefineCustomObjectRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_cube__pb2.DefineCustomObjectResponse.FromString,
                 )
         self.SetCubeLights = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/SetCubeLights',
-                request_serializer=cube__pb2.SetCubeLightsRequest.SerializeToString,
-                response_deserializer=cube__pb2.SetCubeLightsResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_cube__pb2.SetCubeLightsRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_cube__pb2.SetCubeLightsResponse.FromString,
                 )
         self.AudioFeed = channel.unary_stream(
                 '/Anki.Vector.external_interface.ExternalInterface/AudioFeed',
-                request_serializer=messages__pb2.AudioFeedRequest.SerializeToString,
-                response_deserializer=messages__pb2.AudioFeedResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.AudioFeedRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.AudioFeedResponse.FromString,
                 )
         self.CameraFeed = channel.unary_stream(
                 '/Anki.Vector.external_interface.ExternalInterface/CameraFeed',
-                request_serializer=messages__pb2.CameraFeedRequest.SerializeToString,
-                response_deserializer=messages__pb2.CameraFeedResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.CameraFeedRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.CameraFeedResponse.FromString,
                 )
         self.CaptureSingleImage = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/CaptureSingleImage',
-                request_serializer=messages__pb2.CaptureSingleImageRequest.SerializeToString,
-                response_deserializer=messages__pb2.CaptureSingleImageResponse.FromString,
-                )
-        self.GetCameraConfig = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/GetCameraConfig',
-                request_serializer=messages__pb2.CameraConfigRequest.SerializeToString,
-                response_deserializer=messages__pb2.CameraConfigResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.CaptureSingleImageRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.CaptureSingleImageResponse.FromString,
                 )
         self.SetEyeColor = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/SetEyeColor',
-                request_serializer=messages__pb2.SetEyeColorRequest.SerializeToString,
-                response_deserializer=messages__pb2.SetEyeColorResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.SetEyeColorRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.SetEyeColorResponse.FromString,
                 )
         self.NavMapFeed = channel.unary_stream(
                 '/Anki.Vector.external_interface.ExternalInterface/NavMapFeed',
-                request_serializer=nav__map__pb2.NavMapFeedRequest.SerializeToString,
-                response_deserializer=nav__map__pb2.NavMapFeedResponse.FromString,
-                )
-        self.SetCameraSettings = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/SetCameraSettings',
-                request_serializer=messages__pb2.SetCameraSettingsRequest.SerializeToString,
-                response_deserializer=messages__pb2.SetCameraSettingsResponse.FromString,
-                )
-        self.AppIntent = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/AppIntent',
-                request_serializer=messages__pb2.AppIntentRequest.SerializeToString,
-                response_deserializer=messages__pb2.AppIntentResponse.FromString,
-                )
-        self.UpdateSettings = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/UpdateSettings',
-                request_serializer=settings__pb2.UpdateSettingsRequest.SerializeToString,
-                response_deserializer=settings__pb2.UpdateSettingsResponse.FromString,
-                )
-        self.GetLatestAttentionTransfer = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/GetLatestAttentionTransfer',
-                request_serializer=messages__pb2.LatestAttentionTransferRequest.SerializeToString,
-                response_deserializer=messages__pb2.LatestAttentionTransferResponse.FromString,
-                )
-        self.PullJdocs = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/PullJdocs',
-                request_serializer=settings__pb2.PullJdocsRequest.SerializeToString,
-                response_deserializer=settings__pb2.PullJdocsResponse.FromString,
-                )
-        self.UpdateAccountSettings = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/UpdateAccountSettings',
-                request_serializer=settings__pb2.UpdateAccountSettingsRequest.SerializeToString,
-                response_deserializer=settings__pb2.UpdateAccountSettingsResponse.FromString,
-                )
-        self.StartUpdateEngine = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/StartUpdateEngine',
-                request_serializer=messages__pb2.CheckUpdateStatusRequest.SerializeToString,
-                response_deserializer=messages__pb2.CheckUpdateStatusResponse.FromString,
-                )
-        self.CheckUpdateStatus = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/CheckUpdateStatus',
-                request_serializer=messages__pb2.CheckUpdateStatusRequest.SerializeToString,
-                response_deserializer=messages__pb2.CheckUpdateStatusResponse.FromString,
-                )
-        self.UpdateAndRestart = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/UpdateAndRestart',
-                request_serializer=messages__pb2.UpdateAndRestartRequest.SerializeToString,
-                response_deserializer=messages__pb2.UpdateAndRestartResponse.FromString,
-                )
-        self.CheckCloudConnection = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/CheckCloudConnection',
-                request_serializer=messages__pb2.CheckCloudRequest.SerializeToString,
-                response_deserializer=messages__pb2.CheckCloudResponse.FromString,
-                )
-        self.GetFeatureFlag = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/GetFeatureFlag',
-                request_serializer=messages__pb2.FeatureFlagRequest.SerializeToString,
-                response_deserializer=messages__pb2.FeatureFlagResponse.FromString,
-                )
-        self.GetFeatureFlagList = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/GetFeatureFlagList',
-                request_serializer=messages__pb2.FeatureFlagListRequest.SerializeToString,
-                response_deserializer=messages__pb2.FeatureFlagListResponse.FromString,
-                )
-        self.GetAlexaAuthState = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/GetAlexaAuthState',
-                request_serializer=alexa__pb2.AlexaAuthStateRequest.SerializeToString,
-                response_deserializer=alexa__pb2.AlexaAuthStateResponse.FromString,
-                )
-        self.AlexaOptIn = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/AlexaOptIn',
-                request_serializer=alexa__pb2.AlexaOptInRequest.SerializeToString,
-                response_deserializer=alexa__pb2.AlexaOptInResponse.FromString,
+                request_serializer=ha__vector_dot_messaging_dot_nav__map__pb2.NavMapFeedRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_nav__map__pb2.NavMapFeedResponse.FromString,
                 )
 
 
@@ -603,13 +516,6 @@ class ExternalInterfaceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def EnrollFace(self, request, context):
-        """Enroll a face. Must be used with SetFaceToEnroll (v1.7)
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def EnableMarkerDetection(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -648,13 +554,6 @@ class ExternalInterfaceServicer(object):
 
     def CancelActionByIdTag(self, request, context):
         """Cancel action by id
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CancelBehavior(self, request, context):
-        """Cancel running SDK Behavior (v1.7)
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -940,13 +839,6 @@ class ExternalInterfaceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetCameraConfig(self, request, context):
-        """Get Vector's camera configuration. (v1.7)
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def SetEyeColor(self, request, context):
         """Set Vector's eye color.
         """
@@ -961,530 +853,353 @@ class ExternalInterfaceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def SetCameraSettings(self, request, context):
-        """Set Vector's camera settings (v1.7)
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def AppIntent(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def UpdateSettings(self, request, context):
-        """Update settings
-        Added by wayne@codaris.com 
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetLatestAttentionTransfer(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def PullJdocs(self, request, context):
-        """Pull Jdocs
-        Added by wayne@codaris.com 
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def UpdateAccountSettings(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def StartUpdateEngine(self, request, context):
-        """StartUpdateEngine cycles the update-engine service (to start a new check for an update) and sets up a stream of 
-        UpdateStatusResponse Events.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CheckUpdateStatus(self, request, context):
-        """CheckUpdateStatus tells if the robot is ready to reboot and update.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def UpdateAndRestart(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CheckCloudConnection(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetFeatureFlag(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetFeatureFlagList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetAlexaAuthState(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def AlexaOptIn(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_ExternalInterfaceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'ProtocolVersion': grpc.unary_unary_rpc_method_handler(
                     servicer.ProtocolVersion,
-                    request_deserializer=shared__pb2.ProtocolVersionRequest.FromString,
-                    response_serializer=shared__pb2.ProtocolVersionResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_shared__pb2.ProtocolVersionRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_shared__pb2.ProtocolVersionResponse.SerializeToString,
             ),
             'SDKInitialization': grpc.unary_unary_rpc_method_handler(
                     servicer.SDKInitialization,
-                    request_deserializer=messages__pb2.SDKInitializationRequest.FromString,
-                    response_serializer=messages__pb2.SDKInitializationResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.SDKInitializationRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.SDKInitializationResponse.SerializeToString,
             ),
             'DriveWheels': grpc.unary_unary_rpc_method_handler(
                     servicer.DriveWheels,
-                    request_deserializer=messages__pb2.DriveWheelsRequest.FromString,
-                    response_serializer=messages__pb2.DriveWheelsResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.DriveWheelsRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.DriveWheelsResponse.SerializeToString,
             ),
             'PlayAnimationTrigger': grpc.unary_unary_rpc_method_handler(
                     servicer.PlayAnimationTrigger,
-                    request_deserializer=messages__pb2.PlayAnimationTriggerRequest.FromString,
-                    response_serializer=messages__pb2.PlayAnimationResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.PlayAnimationTriggerRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.PlayAnimationResponse.SerializeToString,
             ),
             'PlayAnimation': grpc.unary_unary_rpc_method_handler(
                     servicer.PlayAnimation,
-                    request_deserializer=messages__pb2.PlayAnimationRequest.FromString,
-                    response_serializer=messages__pb2.PlayAnimationResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.PlayAnimationRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.PlayAnimationResponse.SerializeToString,
             ),
             'ListAnimations': grpc.unary_unary_rpc_method_handler(
                     servicer.ListAnimations,
-                    request_deserializer=messages__pb2.ListAnimationsRequest.FromString,
-                    response_serializer=messages__pb2.ListAnimationsResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.ListAnimationsRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.ListAnimationsResponse.SerializeToString,
             ),
             'ListAnimationTriggers': grpc.unary_unary_rpc_method_handler(
                     servicer.ListAnimationTriggers,
-                    request_deserializer=messages__pb2.ListAnimationTriggersRequest.FromString,
-                    response_serializer=messages__pb2.ListAnimationTriggersResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.ListAnimationTriggersRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.ListAnimationTriggersResponse.SerializeToString,
             ),
             'MoveHead': grpc.unary_unary_rpc_method_handler(
                     servicer.MoveHead,
-                    request_deserializer=messages__pb2.MoveHeadRequest.FromString,
-                    response_serializer=messages__pb2.MoveHeadResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.MoveHeadRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.MoveHeadResponse.SerializeToString,
             ),
             'MoveLift': grpc.unary_unary_rpc_method_handler(
                     servicer.MoveLift,
-                    request_deserializer=messages__pb2.MoveLiftRequest.FromString,
-                    response_serializer=messages__pb2.MoveLiftResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.MoveLiftRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.MoveLiftResponse.SerializeToString,
             ),
             'StopAllMotors': grpc.unary_unary_rpc_method_handler(
                     servicer.StopAllMotors,
-                    request_deserializer=messages__pb2.StopAllMotorsRequest.FromString,
-                    response_serializer=messages__pb2.StopAllMotorsResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.StopAllMotorsRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.StopAllMotorsResponse.SerializeToString,
             ),
             'DisplayFaceImageRGB': grpc.unary_unary_rpc_method_handler(
                     servicer.DisplayFaceImageRGB,
-                    request_deserializer=messages__pb2.DisplayFaceImageRGBRequest.FromString,
-                    response_serializer=messages__pb2.DisplayFaceImageRGBResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.DisplayFaceImageRGBRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.DisplayFaceImageRGBResponse.SerializeToString,
             ),
             'EventStream': grpc.unary_stream_rpc_method_handler(
                     servicer.EventStream,
-                    request_deserializer=shared__pb2.EventRequest.FromString,
-                    response_serializer=shared__pb2.EventResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_shared__pb2.EventRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_shared__pb2.EventResponse.SerializeToString,
             ),
             'ExternalAudioStreamPlayback': grpc.stream_stream_rpc_method_handler(
                     servicer.ExternalAudioStreamPlayback,
-                    request_deserializer=messages__pb2.ExternalAudioStreamRequest.FromString,
-                    response_serializer=messages__pb2.ExternalAudioStreamResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.ExternalAudioStreamRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.ExternalAudioStreamResponse.SerializeToString,
             ),
             'BehaviorControl': grpc.stream_stream_rpc_method_handler(
                     servicer.BehaviorControl,
-                    request_deserializer=behavior__pb2.BehaviorControlRequest.FromString,
-                    response_serializer=behavior__pb2.BehaviorControlResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_behavior__pb2.BehaviorControlRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_behavior__pb2.BehaviorControlResponse.SerializeToString,
             ),
             'AssumeBehaviorControl': grpc.unary_stream_rpc_method_handler(
                     servicer.AssumeBehaviorControl,
-                    request_deserializer=behavior__pb2.BehaviorControlRequest.FromString,
-                    response_serializer=behavior__pb2.BehaviorControlResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_behavior__pb2.BehaviorControlRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_behavior__pb2.BehaviorControlResponse.SerializeToString,
             ),
             'CancelFaceEnrollment': grpc.unary_unary_rpc_method_handler(
                     servicer.CancelFaceEnrollment,
-                    request_deserializer=messages__pb2.CancelFaceEnrollmentRequest.FromString,
-                    response_serializer=messages__pb2.CancelFaceEnrollmentResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.CancelFaceEnrollmentRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.CancelFaceEnrollmentResponse.SerializeToString,
             ),
             'RequestEnrolledNames': grpc.unary_unary_rpc_method_handler(
                     servicer.RequestEnrolledNames,
-                    request_deserializer=messages__pb2.RequestEnrolledNamesRequest.FromString,
-                    response_serializer=messages__pb2.RequestEnrolledNamesResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.RequestEnrolledNamesRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.RequestEnrolledNamesResponse.SerializeToString,
             ),
             'UpdateEnrolledFaceByID': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateEnrolledFaceByID,
-                    request_deserializer=messages__pb2.UpdateEnrolledFaceByIDRequest.FromString,
-                    response_serializer=messages__pb2.UpdateEnrolledFaceByIDResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.UpdateEnrolledFaceByIDRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.UpdateEnrolledFaceByIDResponse.SerializeToString,
             ),
             'EraseEnrolledFaceByID': grpc.unary_unary_rpc_method_handler(
                     servicer.EraseEnrolledFaceByID,
-                    request_deserializer=messages__pb2.EraseEnrolledFaceByIDRequest.FromString,
-                    response_serializer=messages__pb2.EraseEnrolledFaceByIDResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.EraseEnrolledFaceByIDRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.EraseEnrolledFaceByIDResponse.SerializeToString,
             ),
             'EraseAllEnrolledFaces': grpc.unary_unary_rpc_method_handler(
                     servicer.EraseAllEnrolledFaces,
-                    request_deserializer=messages__pb2.EraseAllEnrolledFacesRequest.FromString,
-                    response_serializer=messages__pb2.EraseAllEnrolledFacesResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.EraseAllEnrolledFacesRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.EraseAllEnrolledFacesResponse.SerializeToString,
             ),
             'SetFaceToEnroll': grpc.unary_unary_rpc_method_handler(
                     servicer.SetFaceToEnroll,
-                    request_deserializer=messages__pb2.SetFaceToEnrollRequest.FromString,
-                    response_serializer=messages__pb2.SetFaceToEnrollResponse.SerializeToString,
-            ),
-            'EnrollFace': grpc.unary_unary_rpc_method_handler(
-                    servicer.EnrollFace,
-                    request_deserializer=messages__pb2.EnrollFaceRequest.FromString,
-                    response_serializer=messages__pb2.EnrollFaceResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.SetFaceToEnrollRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.SetFaceToEnrollResponse.SerializeToString,
             ),
             'EnableMarkerDetection': grpc.unary_unary_rpc_method_handler(
                     servicer.EnableMarkerDetection,
-                    request_deserializer=messages__pb2.EnableMarkerDetectionRequest.FromString,
-                    response_serializer=messages__pb2.EnableMarkerDetectionResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.EnableMarkerDetectionRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.EnableMarkerDetectionResponse.SerializeToString,
             ),
             'EnableFaceDetection': grpc.unary_unary_rpc_method_handler(
                     servicer.EnableFaceDetection,
-                    request_deserializer=messages__pb2.EnableFaceDetectionRequest.FromString,
-                    response_serializer=messages__pb2.EnableFaceDetectionResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.EnableFaceDetectionRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.EnableFaceDetectionResponse.SerializeToString,
             ),
             'EnableMotionDetection': grpc.unary_unary_rpc_method_handler(
                     servicer.EnableMotionDetection,
-                    request_deserializer=messages__pb2.EnableMotionDetectionRequest.FromString,
-                    response_serializer=messages__pb2.EnableMotionDetectionResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.EnableMotionDetectionRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.EnableMotionDetectionResponse.SerializeToString,
             ),
             'EnableMirrorMode': grpc.unary_unary_rpc_method_handler(
                     servicer.EnableMirrorMode,
-                    request_deserializer=messages__pb2.EnableMirrorModeRequest.FromString,
-                    response_serializer=messages__pb2.EnableMirrorModeResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.EnableMirrorModeRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.EnableMirrorModeResponse.SerializeToString,
             ),
             'EnableImageStreaming': grpc.unary_unary_rpc_method_handler(
                     servicer.EnableImageStreaming,
-                    request_deserializer=messages__pb2.EnableImageStreamingRequest.FromString,
-                    response_serializer=messages__pb2.EnableImageStreamingResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.EnableImageStreamingRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.EnableImageStreamingResponse.SerializeToString,
             ),
             'IsImageStreamingEnabled': grpc.unary_unary_rpc_method_handler(
                     servicer.IsImageStreamingEnabled,
-                    request_deserializer=messages__pb2.IsImageStreamingEnabledRequest.FromString,
-                    response_serializer=messages__pb2.IsImageStreamingEnabledResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.IsImageStreamingEnabledRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.IsImageStreamingEnabledResponse.SerializeToString,
             ),
             'CancelActionByIdTag': grpc.unary_unary_rpc_method_handler(
                     servicer.CancelActionByIdTag,
-                    request_deserializer=messages__pb2.CancelActionByIdTagRequest.FromString,
-                    response_serializer=messages__pb2.CancelActionByIdTagResponse.SerializeToString,
-            ),
-            'CancelBehavior': grpc.unary_unary_rpc_method_handler(
-                    servicer.CancelBehavior,
-                    request_deserializer=messages__pb2.CancelBehaviorRequest.FromString,
-                    response_serializer=messages__pb2.CancelBehaviorResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.CancelActionByIdTagRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.CancelActionByIdTagResponse.SerializeToString,
             ),
             'GoToPose': grpc.unary_unary_rpc_method_handler(
                     servicer.GoToPose,
-                    request_deserializer=messages__pb2.GoToPoseRequest.FromString,
-                    response_serializer=messages__pb2.GoToPoseResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.GoToPoseRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.GoToPoseResponse.SerializeToString,
             ),
             'DockWithCube': grpc.unary_unary_rpc_method_handler(
                     servicer.DockWithCube,
-                    request_deserializer=messages__pb2.DockWithCubeRequest.FromString,
-                    response_serializer=messages__pb2.DockWithCubeResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.DockWithCubeRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.DockWithCubeResponse.SerializeToString,
             ),
             'DriveOffCharger': grpc.unary_unary_rpc_method_handler(
                     servicer.DriveOffCharger,
-                    request_deserializer=messages__pb2.DriveOffChargerRequest.FromString,
-                    response_serializer=messages__pb2.DriveOffChargerResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.DriveOffChargerRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.DriveOffChargerResponse.SerializeToString,
             ),
             'DriveOnCharger': grpc.unary_unary_rpc_method_handler(
                     servicer.DriveOnCharger,
-                    request_deserializer=messages__pb2.DriveOnChargerRequest.FromString,
-                    response_serializer=messages__pb2.DriveOnChargerResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.DriveOnChargerRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.DriveOnChargerResponse.SerializeToString,
             ),
             'FindFaces': grpc.unary_unary_rpc_method_handler(
                     servicer.FindFaces,
-                    request_deserializer=messages__pb2.FindFacesRequest.FromString,
-                    response_serializer=messages__pb2.FindFacesResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.FindFacesRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.FindFacesResponse.SerializeToString,
             ),
             'LookAroundInPlace': grpc.unary_unary_rpc_method_handler(
                     servicer.LookAroundInPlace,
-                    request_deserializer=messages__pb2.LookAroundInPlaceRequest.FromString,
-                    response_serializer=messages__pb2.LookAroundInPlaceResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.LookAroundInPlaceRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.LookAroundInPlaceResponse.SerializeToString,
             ),
             'RollBlock': grpc.unary_unary_rpc_method_handler(
                     servicer.RollBlock,
-                    request_deserializer=messages__pb2.RollBlockRequest.FromString,
-                    response_serializer=messages__pb2.RollBlockResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.RollBlockRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.RollBlockResponse.SerializeToString,
             ),
             'PhotosInfo': grpc.unary_unary_rpc_method_handler(
                     servicer.PhotosInfo,
-                    request_deserializer=messages__pb2.PhotosInfoRequest.FromString,
-                    response_serializer=messages__pb2.PhotosInfoResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.PhotosInfoRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.PhotosInfoResponse.SerializeToString,
             ),
             'Photo': grpc.unary_unary_rpc_method_handler(
                     servicer.Photo,
-                    request_deserializer=messages__pb2.PhotoRequest.FromString,
-                    response_serializer=messages__pb2.PhotoResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.PhotoRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.PhotoResponse.SerializeToString,
             ),
             'Thumbnail': grpc.unary_unary_rpc_method_handler(
                     servicer.Thumbnail,
-                    request_deserializer=messages__pb2.ThumbnailRequest.FromString,
-                    response_serializer=messages__pb2.ThumbnailResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.ThumbnailRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.ThumbnailResponse.SerializeToString,
             ),
             'DeletePhoto': grpc.unary_unary_rpc_method_handler(
                     servicer.DeletePhoto,
-                    request_deserializer=messages__pb2.DeletePhotoRequest.FromString,
-                    response_serializer=messages__pb2.DeletePhotoResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.DeletePhotoRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.DeletePhotoResponse.SerializeToString,
             ),
             'DriveStraight': grpc.unary_unary_rpc_method_handler(
                     servicer.DriveStraight,
-                    request_deserializer=messages__pb2.DriveStraightRequest.FromString,
-                    response_serializer=messages__pb2.DriveStraightResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.DriveStraightRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.DriveStraightResponse.SerializeToString,
             ),
             'TurnInPlace': grpc.unary_unary_rpc_method_handler(
                     servicer.TurnInPlace,
-                    request_deserializer=messages__pb2.TurnInPlaceRequest.FromString,
-                    response_serializer=messages__pb2.TurnInPlaceResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.TurnInPlaceRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.TurnInPlaceResponse.SerializeToString,
             ),
             'SetHeadAngle': grpc.unary_unary_rpc_method_handler(
                     servicer.SetHeadAngle,
-                    request_deserializer=messages__pb2.SetHeadAngleRequest.FromString,
-                    response_serializer=messages__pb2.SetHeadAngleResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.SetHeadAngleRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.SetHeadAngleResponse.SerializeToString,
             ),
             'SetLiftHeight': grpc.unary_unary_rpc_method_handler(
                     servicer.SetLiftHeight,
-                    request_deserializer=messages__pb2.SetLiftHeightRequest.FromString,
-                    response_serializer=messages__pb2.SetLiftHeightResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.SetLiftHeightRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.SetLiftHeightResponse.SerializeToString,
             ),
             'TurnTowardsFace': grpc.unary_unary_rpc_method_handler(
                     servicer.TurnTowardsFace,
-                    request_deserializer=messages__pb2.TurnTowardsFaceRequest.FromString,
-                    response_serializer=messages__pb2.TurnTowardsFaceResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.TurnTowardsFaceRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.TurnTowardsFaceResponse.SerializeToString,
             ),
             'GoToObject': grpc.unary_unary_rpc_method_handler(
                     servicer.GoToObject,
-                    request_deserializer=messages__pb2.GoToObjectRequest.FromString,
-                    response_serializer=messages__pb2.GoToObjectResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.GoToObjectRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.GoToObjectResponse.SerializeToString,
             ),
             'RollObject': grpc.unary_unary_rpc_method_handler(
                     servicer.RollObject,
-                    request_deserializer=messages__pb2.RollObjectRequest.FromString,
-                    response_serializer=messages__pb2.RollObjectResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.RollObjectRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.RollObjectResponse.SerializeToString,
             ),
             'PopAWheelie': grpc.unary_unary_rpc_method_handler(
                     servicer.PopAWheelie,
-                    request_deserializer=messages__pb2.PopAWheelieRequest.FromString,
-                    response_serializer=messages__pb2.PopAWheelieResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.PopAWheelieRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.PopAWheelieResponse.SerializeToString,
             ),
             'PickupObject': grpc.unary_unary_rpc_method_handler(
                     servicer.PickupObject,
-                    request_deserializer=messages__pb2.PickupObjectRequest.FromString,
-                    response_serializer=messages__pb2.PickupObjectResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.PickupObjectRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.PickupObjectResponse.SerializeToString,
             ),
             'PlaceObjectOnGroundHere': grpc.unary_unary_rpc_method_handler(
                     servicer.PlaceObjectOnGroundHere,
-                    request_deserializer=messages__pb2.PlaceObjectOnGroundHereRequest.FromString,
-                    response_serializer=messages__pb2.PlaceObjectOnGroundHereResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.PlaceObjectOnGroundHereRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.PlaceObjectOnGroundHereResponse.SerializeToString,
             ),
             'SetMasterVolume': grpc.unary_unary_rpc_method_handler(
                     servicer.SetMasterVolume,
-                    request_deserializer=messages__pb2.MasterVolumeRequest.FromString,
-                    response_serializer=messages__pb2.MasterVolumeResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.MasterVolumeRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.MasterVolumeResponse.SerializeToString,
             ),
             'UserAuthentication': grpc.unary_unary_rpc_method_handler(
                     servicer.UserAuthentication,
-                    request_deserializer=shared__pb2.UserAuthenticationRequest.FromString,
-                    response_serializer=shared__pb2.UserAuthenticationResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_shared__pb2.UserAuthenticationRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_shared__pb2.UserAuthenticationResponse.SerializeToString,
             ),
             'BatteryState': grpc.unary_unary_rpc_method_handler(
                     servicer.BatteryState,
-                    request_deserializer=messages__pb2.BatteryStateRequest.FromString,
-                    response_serializer=messages__pb2.BatteryStateResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.BatteryStateRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.BatteryStateResponse.SerializeToString,
             ),
             'VersionState': grpc.unary_unary_rpc_method_handler(
                     servicer.VersionState,
-                    request_deserializer=messages__pb2.VersionStateRequest.FromString,
-                    response_serializer=messages__pb2.VersionStateResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.VersionStateRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.VersionStateResponse.SerializeToString,
             ),
             'SayText': grpc.unary_unary_rpc_method_handler(
                     servicer.SayText,
-                    request_deserializer=messages__pb2.SayTextRequest.FromString,
-                    response_serializer=messages__pb2.SayTextResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.SayTextRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.SayTextResponse.SerializeToString,
             ),
             'ConnectCube': grpc.unary_unary_rpc_method_handler(
                     servicer.ConnectCube,
-                    request_deserializer=cube__pb2.ConnectCubeRequest.FromString,
-                    response_serializer=cube__pb2.ConnectCubeResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_cube__pb2.ConnectCubeRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_cube__pb2.ConnectCubeResponse.SerializeToString,
             ),
             'DisconnectCube': grpc.unary_unary_rpc_method_handler(
                     servicer.DisconnectCube,
-                    request_deserializer=cube__pb2.DisconnectCubeRequest.FromString,
-                    response_serializer=cube__pb2.DisconnectCubeResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_cube__pb2.DisconnectCubeRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_cube__pb2.DisconnectCubeResponse.SerializeToString,
             ),
             'CubesAvailable': grpc.unary_unary_rpc_method_handler(
                     servicer.CubesAvailable,
-                    request_deserializer=cube__pb2.CubesAvailableRequest.FromString,
-                    response_serializer=cube__pb2.CubesAvailableResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_cube__pb2.CubesAvailableRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_cube__pb2.CubesAvailableResponse.SerializeToString,
             ),
             'FlashCubeLights': grpc.unary_unary_rpc_method_handler(
                     servicer.FlashCubeLights,
-                    request_deserializer=cube__pb2.FlashCubeLightsRequest.FromString,
-                    response_serializer=cube__pb2.FlashCubeLightsResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_cube__pb2.FlashCubeLightsRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_cube__pb2.FlashCubeLightsResponse.SerializeToString,
             ),
             'ForgetPreferredCube': grpc.unary_unary_rpc_method_handler(
                     servicer.ForgetPreferredCube,
-                    request_deserializer=cube__pb2.ForgetPreferredCubeRequest.FromString,
-                    response_serializer=cube__pb2.ForgetPreferredCubeResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_cube__pb2.ForgetPreferredCubeRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_cube__pb2.ForgetPreferredCubeResponse.SerializeToString,
             ),
             'SetPreferredCube': grpc.unary_unary_rpc_method_handler(
                     servicer.SetPreferredCube,
-                    request_deserializer=cube__pb2.SetPreferredCubeRequest.FromString,
-                    response_serializer=cube__pb2.SetPreferredCubeResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_cube__pb2.SetPreferredCubeRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_cube__pb2.SetPreferredCubeResponse.SerializeToString,
             ),
             'DeleteCustomObjects': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteCustomObjects,
-                    request_deserializer=cube__pb2.DeleteCustomObjectsRequest.FromString,
-                    response_serializer=cube__pb2.DeleteCustomObjectsResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_cube__pb2.DeleteCustomObjectsRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_cube__pb2.DeleteCustomObjectsResponse.SerializeToString,
             ),
             'CreateFixedCustomObject': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateFixedCustomObject,
-                    request_deserializer=cube__pb2.CreateFixedCustomObjectRequest.FromString,
-                    response_serializer=cube__pb2.CreateFixedCustomObjectResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_cube__pb2.CreateFixedCustomObjectRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_cube__pb2.CreateFixedCustomObjectResponse.SerializeToString,
             ),
             'DefineCustomObject': grpc.unary_unary_rpc_method_handler(
                     servicer.DefineCustomObject,
-                    request_deserializer=cube__pb2.DefineCustomObjectRequest.FromString,
-                    response_serializer=cube__pb2.DefineCustomObjectResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_cube__pb2.DefineCustomObjectRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_cube__pb2.DefineCustomObjectResponse.SerializeToString,
             ),
             'SetCubeLights': grpc.unary_unary_rpc_method_handler(
                     servicer.SetCubeLights,
-                    request_deserializer=cube__pb2.SetCubeLightsRequest.FromString,
-                    response_serializer=cube__pb2.SetCubeLightsResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_cube__pb2.SetCubeLightsRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_cube__pb2.SetCubeLightsResponse.SerializeToString,
             ),
             'AudioFeed': grpc.unary_stream_rpc_method_handler(
                     servicer.AudioFeed,
-                    request_deserializer=messages__pb2.AudioFeedRequest.FromString,
-                    response_serializer=messages__pb2.AudioFeedResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.AudioFeedRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.AudioFeedResponse.SerializeToString,
             ),
             'CameraFeed': grpc.unary_stream_rpc_method_handler(
                     servicer.CameraFeed,
-                    request_deserializer=messages__pb2.CameraFeedRequest.FromString,
-                    response_serializer=messages__pb2.CameraFeedResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.CameraFeedRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.CameraFeedResponse.SerializeToString,
             ),
             'CaptureSingleImage': grpc.unary_unary_rpc_method_handler(
                     servicer.CaptureSingleImage,
-                    request_deserializer=messages__pb2.CaptureSingleImageRequest.FromString,
-                    response_serializer=messages__pb2.CaptureSingleImageResponse.SerializeToString,
-            ),
-            'GetCameraConfig': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetCameraConfig,
-                    request_deserializer=messages__pb2.CameraConfigRequest.FromString,
-                    response_serializer=messages__pb2.CameraConfigResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.CaptureSingleImageRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.CaptureSingleImageResponse.SerializeToString,
             ),
             'SetEyeColor': grpc.unary_unary_rpc_method_handler(
                     servicer.SetEyeColor,
-                    request_deserializer=messages__pb2.SetEyeColorRequest.FromString,
-                    response_serializer=messages__pb2.SetEyeColorResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.SetEyeColorRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.SetEyeColorResponse.SerializeToString,
             ),
             'NavMapFeed': grpc.unary_stream_rpc_method_handler(
                     servicer.NavMapFeed,
-                    request_deserializer=nav__map__pb2.NavMapFeedRequest.FromString,
-                    response_serializer=nav__map__pb2.NavMapFeedResponse.SerializeToString,
-            ),
-            'SetCameraSettings': grpc.unary_unary_rpc_method_handler(
-                    servicer.SetCameraSettings,
-                    request_deserializer=messages__pb2.SetCameraSettingsRequest.FromString,
-                    response_serializer=messages__pb2.SetCameraSettingsResponse.SerializeToString,
-            ),
-            'AppIntent': grpc.unary_unary_rpc_method_handler(
-                    servicer.AppIntent,
-                    request_deserializer=messages__pb2.AppIntentRequest.FromString,
-                    response_serializer=messages__pb2.AppIntentResponse.SerializeToString,
-            ),
-            'UpdateSettings': grpc.unary_unary_rpc_method_handler(
-                    servicer.UpdateSettings,
-                    request_deserializer=settings__pb2.UpdateSettingsRequest.FromString,
-                    response_serializer=settings__pb2.UpdateSettingsResponse.SerializeToString,
-            ),
-            'GetLatestAttentionTransfer': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetLatestAttentionTransfer,
-                    request_deserializer=messages__pb2.LatestAttentionTransferRequest.FromString,
-                    response_serializer=messages__pb2.LatestAttentionTransferResponse.SerializeToString,
-            ),
-            'PullJdocs': grpc.unary_unary_rpc_method_handler(
-                    servicer.PullJdocs,
-                    request_deserializer=settings__pb2.PullJdocsRequest.FromString,
-                    response_serializer=settings__pb2.PullJdocsResponse.SerializeToString,
-            ),
-            'UpdateAccountSettings': grpc.unary_unary_rpc_method_handler(
-                    servicer.UpdateAccountSettings,
-                    request_deserializer=settings__pb2.UpdateAccountSettingsRequest.FromString,
-                    response_serializer=settings__pb2.UpdateAccountSettingsResponse.SerializeToString,
-            ),
-            'StartUpdateEngine': grpc.unary_unary_rpc_method_handler(
-                    servicer.StartUpdateEngine,
-                    request_deserializer=messages__pb2.CheckUpdateStatusRequest.FromString,
-                    response_serializer=messages__pb2.CheckUpdateStatusResponse.SerializeToString,
-            ),
-            'CheckUpdateStatus': grpc.unary_unary_rpc_method_handler(
-                    servicer.CheckUpdateStatus,
-                    request_deserializer=messages__pb2.CheckUpdateStatusRequest.FromString,
-                    response_serializer=messages__pb2.CheckUpdateStatusResponse.SerializeToString,
-            ),
-            'UpdateAndRestart': grpc.unary_unary_rpc_method_handler(
-                    servicer.UpdateAndRestart,
-                    request_deserializer=messages__pb2.UpdateAndRestartRequest.FromString,
-                    response_serializer=messages__pb2.UpdateAndRestartResponse.SerializeToString,
-            ),
-            'CheckCloudConnection': grpc.unary_unary_rpc_method_handler(
-                    servicer.CheckCloudConnection,
-                    request_deserializer=messages__pb2.CheckCloudRequest.FromString,
-                    response_serializer=messages__pb2.CheckCloudResponse.SerializeToString,
-            ),
-            'GetFeatureFlag': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetFeatureFlag,
-                    request_deserializer=messages__pb2.FeatureFlagRequest.FromString,
-                    response_serializer=messages__pb2.FeatureFlagResponse.SerializeToString,
-            ),
-            'GetFeatureFlagList': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetFeatureFlagList,
-                    request_deserializer=messages__pb2.FeatureFlagListRequest.FromString,
-                    response_serializer=messages__pb2.FeatureFlagListResponse.SerializeToString,
-            ),
-            'GetAlexaAuthState': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAlexaAuthState,
-                    request_deserializer=alexa__pb2.AlexaAuthStateRequest.FromString,
-                    response_serializer=alexa__pb2.AlexaAuthStateResponse.SerializeToString,
-            ),
-            'AlexaOptIn': grpc.unary_unary_rpc_method_handler(
-                    servicer.AlexaOptIn,
-                    request_deserializer=alexa__pb2.AlexaOptInRequest.FromString,
-                    response_serializer=alexa__pb2.AlexaOptInResponse.SerializeToString,
+                    request_deserializer=ha__vector_dot_messaging_dot_nav__map__pb2.NavMapFeedRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_nav__map__pb2.NavMapFeedResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -1509,8 +1224,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/ProtocolVersion',
-            shared__pb2.ProtocolVersionRequest.SerializeToString,
-            shared__pb2.ProtocolVersionResponse.FromString,
+            ha__vector_dot_messaging_dot_shared__pb2.ProtocolVersionRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_shared__pb2.ProtocolVersionResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1526,8 +1241,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/SDKInitialization',
-            messages__pb2.SDKInitializationRequest.SerializeToString,
-            messages__pb2.SDKInitializationResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.SDKInitializationRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.SDKInitializationResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1543,8 +1258,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/DriveWheels',
-            messages__pb2.DriveWheelsRequest.SerializeToString,
-            messages__pb2.DriveWheelsResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.DriveWheelsRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.DriveWheelsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1560,8 +1275,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/PlayAnimationTrigger',
-            messages__pb2.PlayAnimationTriggerRequest.SerializeToString,
-            messages__pb2.PlayAnimationResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.PlayAnimationTriggerRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.PlayAnimationResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1577,8 +1292,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/PlayAnimation',
-            messages__pb2.PlayAnimationRequest.SerializeToString,
-            messages__pb2.PlayAnimationResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.PlayAnimationRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.PlayAnimationResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1594,8 +1309,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/ListAnimations',
-            messages__pb2.ListAnimationsRequest.SerializeToString,
-            messages__pb2.ListAnimationsResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.ListAnimationsRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.ListAnimationsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1611,8 +1326,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/ListAnimationTriggers',
-            messages__pb2.ListAnimationTriggersRequest.SerializeToString,
-            messages__pb2.ListAnimationTriggersResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.ListAnimationTriggersRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.ListAnimationTriggersResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1628,8 +1343,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/MoveHead',
-            messages__pb2.MoveHeadRequest.SerializeToString,
-            messages__pb2.MoveHeadResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.MoveHeadRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.MoveHeadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1645,8 +1360,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/MoveLift',
-            messages__pb2.MoveLiftRequest.SerializeToString,
-            messages__pb2.MoveLiftResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.MoveLiftRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.MoveLiftResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1662,8 +1377,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/StopAllMotors',
-            messages__pb2.StopAllMotorsRequest.SerializeToString,
-            messages__pb2.StopAllMotorsResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.StopAllMotorsRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.StopAllMotorsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1679,8 +1394,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/DisplayFaceImageRGB',
-            messages__pb2.DisplayFaceImageRGBRequest.SerializeToString,
-            messages__pb2.DisplayFaceImageRGBResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.DisplayFaceImageRGBRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.DisplayFaceImageRGBResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1696,8 +1411,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/Anki.Vector.external_interface.ExternalInterface/EventStream',
-            shared__pb2.EventRequest.SerializeToString,
-            shared__pb2.EventResponse.FromString,
+            ha__vector_dot_messaging_dot_shared__pb2.EventRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_shared__pb2.EventResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1713,8 +1428,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.stream_stream(request_iterator, target, '/Anki.Vector.external_interface.ExternalInterface/ExternalAudioStreamPlayback',
-            messages__pb2.ExternalAudioStreamRequest.SerializeToString,
-            messages__pb2.ExternalAudioStreamResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.ExternalAudioStreamRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.ExternalAudioStreamResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1730,8 +1445,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.stream_stream(request_iterator, target, '/Anki.Vector.external_interface.ExternalInterface/BehaviorControl',
-            behavior__pb2.BehaviorControlRequest.SerializeToString,
-            behavior__pb2.BehaviorControlResponse.FromString,
+            ha__vector_dot_messaging_dot_behavior__pb2.BehaviorControlRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_behavior__pb2.BehaviorControlResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1747,8 +1462,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/Anki.Vector.external_interface.ExternalInterface/AssumeBehaviorControl',
-            behavior__pb2.BehaviorControlRequest.SerializeToString,
-            behavior__pb2.BehaviorControlResponse.FromString,
+            ha__vector_dot_messaging_dot_behavior__pb2.BehaviorControlRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_behavior__pb2.BehaviorControlResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1764,8 +1479,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/CancelFaceEnrollment',
-            messages__pb2.CancelFaceEnrollmentRequest.SerializeToString,
-            messages__pb2.CancelFaceEnrollmentResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.CancelFaceEnrollmentRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.CancelFaceEnrollmentResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1781,8 +1496,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/RequestEnrolledNames',
-            messages__pb2.RequestEnrolledNamesRequest.SerializeToString,
-            messages__pb2.RequestEnrolledNamesResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.RequestEnrolledNamesRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.RequestEnrolledNamesResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1798,8 +1513,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/UpdateEnrolledFaceByID',
-            messages__pb2.UpdateEnrolledFaceByIDRequest.SerializeToString,
-            messages__pb2.UpdateEnrolledFaceByIDResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.UpdateEnrolledFaceByIDRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.UpdateEnrolledFaceByIDResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1815,8 +1530,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/EraseEnrolledFaceByID',
-            messages__pb2.EraseEnrolledFaceByIDRequest.SerializeToString,
-            messages__pb2.EraseEnrolledFaceByIDResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.EraseEnrolledFaceByIDRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.EraseEnrolledFaceByIDResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1832,8 +1547,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/EraseAllEnrolledFaces',
-            messages__pb2.EraseAllEnrolledFacesRequest.SerializeToString,
-            messages__pb2.EraseAllEnrolledFacesResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.EraseAllEnrolledFacesRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.EraseAllEnrolledFacesResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1849,25 +1564,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/SetFaceToEnroll',
-            messages__pb2.SetFaceToEnrollRequest.SerializeToString,
-            messages__pb2.SetFaceToEnrollResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def EnrollFace(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/EnrollFace',
-            messages__pb2.EnrollFaceRequest.SerializeToString,
-            messages__pb2.EnrollFaceResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.SetFaceToEnrollRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.SetFaceToEnrollResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1883,8 +1581,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/EnableMarkerDetection',
-            messages__pb2.EnableMarkerDetectionRequest.SerializeToString,
-            messages__pb2.EnableMarkerDetectionResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.EnableMarkerDetectionRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.EnableMarkerDetectionResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1900,8 +1598,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/EnableFaceDetection',
-            messages__pb2.EnableFaceDetectionRequest.SerializeToString,
-            messages__pb2.EnableFaceDetectionResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.EnableFaceDetectionRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.EnableFaceDetectionResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1917,8 +1615,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/EnableMotionDetection',
-            messages__pb2.EnableMotionDetectionRequest.SerializeToString,
-            messages__pb2.EnableMotionDetectionResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.EnableMotionDetectionRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.EnableMotionDetectionResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1934,8 +1632,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/EnableMirrorMode',
-            messages__pb2.EnableMirrorModeRequest.SerializeToString,
-            messages__pb2.EnableMirrorModeResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.EnableMirrorModeRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.EnableMirrorModeResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1951,8 +1649,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/EnableImageStreaming',
-            messages__pb2.EnableImageStreamingRequest.SerializeToString,
-            messages__pb2.EnableImageStreamingResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.EnableImageStreamingRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.EnableImageStreamingResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1968,8 +1666,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/IsImageStreamingEnabled',
-            messages__pb2.IsImageStreamingEnabledRequest.SerializeToString,
-            messages__pb2.IsImageStreamingEnabledResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.IsImageStreamingEnabledRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.IsImageStreamingEnabledResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1985,25 +1683,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/CancelActionByIdTag',
-            messages__pb2.CancelActionByIdTagRequest.SerializeToString,
-            messages__pb2.CancelActionByIdTagResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def CancelBehavior(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/CancelBehavior',
-            messages__pb2.CancelBehaviorRequest.SerializeToString,
-            messages__pb2.CancelBehaviorResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.CancelActionByIdTagRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.CancelActionByIdTagResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2019,8 +1700,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/GoToPose',
-            messages__pb2.GoToPoseRequest.SerializeToString,
-            messages__pb2.GoToPoseResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.GoToPoseRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.GoToPoseResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2036,8 +1717,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/DockWithCube',
-            messages__pb2.DockWithCubeRequest.SerializeToString,
-            messages__pb2.DockWithCubeResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.DockWithCubeRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.DockWithCubeResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2053,8 +1734,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/DriveOffCharger',
-            messages__pb2.DriveOffChargerRequest.SerializeToString,
-            messages__pb2.DriveOffChargerResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.DriveOffChargerRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.DriveOffChargerResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2070,8 +1751,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/DriveOnCharger',
-            messages__pb2.DriveOnChargerRequest.SerializeToString,
-            messages__pb2.DriveOnChargerResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.DriveOnChargerRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.DriveOnChargerResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2087,8 +1768,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/FindFaces',
-            messages__pb2.FindFacesRequest.SerializeToString,
-            messages__pb2.FindFacesResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.FindFacesRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.FindFacesResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2104,8 +1785,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/LookAroundInPlace',
-            messages__pb2.LookAroundInPlaceRequest.SerializeToString,
-            messages__pb2.LookAroundInPlaceResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.LookAroundInPlaceRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.LookAroundInPlaceResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2121,8 +1802,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/RollBlock',
-            messages__pb2.RollBlockRequest.SerializeToString,
-            messages__pb2.RollBlockResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.RollBlockRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.RollBlockResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2138,8 +1819,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/PhotosInfo',
-            messages__pb2.PhotosInfoRequest.SerializeToString,
-            messages__pb2.PhotosInfoResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.PhotosInfoRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.PhotosInfoResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2155,8 +1836,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/Photo',
-            messages__pb2.PhotoRequest.SerializeToString,
-            messages__pb2.PhotoResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.PhotoRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.PhotoResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2172,8 +1853,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/Thumbnail',
-            messages__pb2.ThumbnailRequest.SerializeToString,
-            messages__pb2.ThumbnailResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.ThumbnailRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.ThumbnailResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2189,8 +1870,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/DeletePhoto',
-            messages__pb2.DeletePhotoRequest.SerializeToString,
-            messages__pb2.DeletePhotoResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.DeletePhotoRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.DeletePhotoResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2206,8 +1887,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/DriveStraight',
-            messages__pb2.DriveStraightRequest.SerializeToString,
-            messages__pb2.DriveStraightResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.DriveStraightRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.DriveStraightResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2223,8 +1904,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/TurnInPlace',
-            messages__pb2.TurnInPlaceRequest.SerializeToString,
-            messages__pb2.TurnInPlaceResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.TurnInPlaceRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.TurnInPlaceResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2240,8 +1921,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/SetHeadAngle',
-            messages__pb2.SetHeadAngleRequest.SerializeToString,
-            messages__pb2.SetHeadAngleResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.SetHeadAngleRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.SetHeadAngleResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2257,8 +1938,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/SetLiftHeight',
-            messages__pb2.SetLiftHeightRequest.SerializeToString,
-            messages__pb2.SetLiftHeightResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.SetLiftHeightRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.SetLiftHeightResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2274,8 +1955,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/TurnTowardsFace',
-            messages__pb2.TurnTowardsFaceRequest.SerializeToString,
-            messages__pb2.TurnTowardsFaceResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.TurnTowardsFaceRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.TurnTowardsFaceResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2291,8 +1972,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/GoToObject',
-            messages__pb2.GoToObjectRequest.SerializeToString,
-            messages__pb2.GoToObjectResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.GoToObjectRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.GoToObjectResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2308,8 +1989,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/RollObject',
-            messages__pb2.RollObjectRequest.SerializeToString,
-            messages__pb2.RollObjectResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.RollObjectRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.RollObjectResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2325,8 +2006,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/PopAWheelie',
-            messages__pb2.PopAWheelieRequest.SerializeToString,
-            messages__pb2.PopAWheelieResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.PopAWheelieRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.PopAWheelieResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2342,8 +2023,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/PickupObject',
-            messages__pb2.PickupObjectRequest.SerializeToString,
-            messages__pb2.PickupObjectResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.PickupObjectRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.PickupObjectResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2359,8 +2040,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/PlaceObjectOnGroundHere',
-            messages__pb2.PlaceObjectOnGroundHereRequest.SerializeToString,
-            messages__pb2.PlaceObjectOnGroundHereResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.PlaceObjectOnGroundHereRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.PlaceObjectOnGroundHereResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2376,8 +2057,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/SetMasterVolume',
-            messages__pb2.MasterVolumeRequest.SerializeToString,
-            messages__pb2.MasterVolumeResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.MasterVolumeRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.MasterVolumeResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2393,8 +2074,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/UserAuthentication',
-            shared__pb2.UserAuthenticationRequest.SerializeToString,
-            shared__pb2.UserAuthenticationResponse.FromString,
+            ha__vector_dot_messaging_dot_shared__pb2.UserAuthenticationRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_shared__pb2.UserAuthenticationResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2410,8 +2091,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/BatteryState',
-            messages__pb2.BatteryStateRequest.SerializeToString,
-            messages__pb2.BatteryStateResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.BatteryStateRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.BatteryStateResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2427,8 +2108,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/VersionState',
-            messages__pb2.VersionStateRequest.SerializeToString,
-            messages__pb2.VersionStateResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.VersionStateRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.VersionStateResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2444,8 +2125,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/SayText',
-            messages__pb2.SayTextRequest.SerializeToString,
-            messages__pb2.SayTextResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.SayTextRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.SayTextResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2461,8 +2142,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/ConnectCube',
-            cube__pb2.ConnectCubeRequest.SerializeToString,
-            cube__pb2.ConnectCubeResponse.FromString,
+            ha__vector_dot_messaging_dot_cube__pb2.ConnectCubeRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_cube__pb2.ConnectCubeResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2478,8 +2159,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/DisconnectCube',
-            cube__pb2.DisconnectCubeRequest.SerializeToString,
-            cube__pb2.DisconnectCubeResponse.FromString,
+            ha__vector_dot_messaging_dot_cube__pb2.DisconnectCubeRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_cube__pb2.DisconnectCubeResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2495,8 +2176,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/CubesAvailable',
-            cube__pb2.CubesAvailableRequest.SerializeToString,
-            cube__pb2.CubesAvailableResponse.FromString,
+            ha__vector_dot_messaging_dot_cube__pb2.CubesAvailableRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_cube__pb2.CubesAvailableResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2512,8 +2193,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/FlashCubeLights',
-            cube__pb2.FlashCubeLightsRequest.SerializeToString,
-            cube__pb2.FlashCubeLightsResponse.FromString,
+            ha__vector_dot_messaging_dot_cube__pb2.FlashCubeLightsRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_cube__pb2.FlashCubeLightsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2529,8 +2210,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/ForgetPreferredCube',
-            cube__pb2.ForgetPreferredCubeRequest.SerializeToString,
-            cube__pb2.ForgetPreferredCubeResponse.FromString,
+            ha__vector_dot_messaging_dot_cube__pb2.ForgetPreferredCubeRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_cube__pb2.ForgetPreferredCubeResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2546,8 +2227,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/SetPreferredCube',
-            cube__pb2.SetPreferredCubeRequest.SerializeToString,
-            cube__pb2.SetPreferredCubeResponse.FromString,
+            ha__vector_dot_messaging_dot_cube__pb2.SetPreferredCubeRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_cube__pb2.SetPreferredCubeResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2563,8 +2244,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/DeleteCustomObjects',
-            cube__pb2.DeleteCustomObjectsRequest.SerializeToString,
-            cube__pb2.DeleteCustomObjectsResponse.FromString,
+            ha__vector_dot_messaging_dot_cube__pb2.DeleteCustomObjectsRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_cube__pb2.DeleteCustomObjectsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2580,8 +2261,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/CreateFixedCustomObject',
-            cube__pb2.CreateFixedCustomObjectRequest.SerializeToString,
-            cube__pb2.CreateFixedCustomObjectResponse.FromString,
+            ha__vector_dot_messaging_dot_cube__pb2.CreateFixedCustomObjectRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_cube__pb2.CreateFixedCustomObjectResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2597,8 +2278,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/DefineCustomObject',
-            cube__pb2.DefineCustomObjectRequest.SerializeToString,
-            cube__pb2.DefineCustomObjectResponse.FromString,
+            ha__vector_dot_messaging_dot_cube__pb2.DefineCustomObjectRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_cube__pb2.DefineCustomObjectResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2614,8 +2295,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/SetCubeLights',
-            cube__pb2.SetCubeLightsRequest.SerializeToString,
-            cube__pb2.SetCubeLightsResponse.FromString,
+            ha__vector_dot_messaging_dot_cube__pb2.SetCubeLightsRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_cube__pb2.SetCubeLightsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2631,8 +2312,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/Anki.Vector.external_interface.ExternalInterface/AudioFeed',
-            messages__pb2.AudioFeedRequest.SerializeToString,
-            messages__pb2.AudioFeedResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.AudioFeedRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.AudioFeedResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2648,8 +2329,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/Anki.Vector.external_interface.ExternalInterface/CameraFeed',
-            messages__pb2.CameraFeedRequest.SerializeToString,
-            messages__pb2.CameraFeedResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.CameraFeedRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.CameraFeedResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2665,25 +2346,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/CaptureSingleImage',
-            messages__pb2.CaptureSingleImageRequest.SerializeToString,
-            messages__pb2.CaptureSingleImageResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetCameraConfig(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/GetCameraConfig',
-            messages__pb2.CameraConfigRequest.SerializeToString,
-            messages__pb2.CameraConfigResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.CaptureSingleImageRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.CaptureSingleImageResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2699,8 +2363,8 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/SetEyeColor',
-            messages__pb2.SetEyeColorRequest.SerializeToString,
-            messages__pb2.SetEyeColorResponse.FromString,
+            ha__vector_dot_messaging_dot_messages__pb2.SetEyeColorRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.SetEyeColorResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2716,245 +2380,7 @@ class ExternalInterface(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/Anki.Vector.external_interface.ExternalInterface/NavMapFeed',
-            nav__map__pb2.NavMapFeedRequest.SerializeToString,
-            nav__map__pb2.NavMapFeedResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def SetCameraSettings(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/SetCameraSettings',
-            messages__pb2.SetCameraSettingsRequest.SerializeToString,
-            messages__pb2.SetCameraSettingsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def AppIntent(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/AppIntent',
-            messages__pb2.AppIntentRequest.SerializeToString,
-            messages__pb2.AppIntentResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def UpdateSettings(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/UpdateSettings',
-            settings__pb2.UpdateSettingsRequest.SerializeToString,
-            settings__pb2.UpdateSettingsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetLatestAttentionTransfer(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/GetLatestAttentionTransfer',
-            messages__pb2.LatestAttentionTransferRequest.SerializeToString,
-            messages__pb2.LatestAttentionTransferResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def PullJdocs(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/PullJdocs',
-            settings__pb2.PullJdocsRequest.SerializeToString,
-            settings__pb2.PullJdocsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def UpdateAccountSettings(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/UpdateAccountSettings',
-            settings__pb2.UpdateAccountSettingsRequest.SerializeToString,
-            settings__pb2.UpdateAccountSettingsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def StartUpdateEngine(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/StartUpdateEngine',
-            messages__pb2.CheckUpdateStatusRequest.SerializeToString,
-            messages__pb2.CheckUpdateStatusResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def CheckUpdateStatus(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/CheckUpdateStatus',
-            messages__pb2.CheckUpdateStatusRequest.SerializeToString,
-            messages__pb2.CheckUpdateStatusResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def UpdateAndRestart(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/UpdateAndRestart',
-            messages__pb2.UpdateAndRestartRequest.SerializeToString,
-            messages__pb2.UpdateAndRestartResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def CheckCloudConnection(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/CheckCloudConnection',
-            messages__pb2.CheckCloudRequest.SerializeToString,
-            messages__pb2.CheckCloudResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetFeatureFlag(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/GetFeatureFlag',
-            messages__pb2.FeatureFlagRequest.SerializeToString,
-            messages__pb2.FeatureFlagResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetFeatureFlagList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/GetFeatureFlagList',
-            messages__pb2.FeatureFlagListRequest.SerializeToString,
-            messages__pb2.FeatureFlagListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetAlexaAuthState(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/GetAlexaAuthState',
-            alexa__pb2.AlexaAuthStateRequest.SerializeToString,
-            alexa__pb2.AlexaAuthStateResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def AlexaOptIn(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/AlexaOptIn',
-            alexa__pb2.AlexaOptInRequest.SerializeToString,
-            alexa__pb2.AlexaOptInResponse.FromString,
+            ha__vector_dot_messaging_dot_nav__map__pb2.NavMapFeedRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_nav__map__pb2.NavMapFeedResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
