@@ -138,7 +138,7 @@ class EventHandler:
         try:
             self._loop = asyncio.new_event_loop()
             asyncio.set_event_loop(self._loop)
-            self._done_signal = asyncio.Event(loop=self._loop)
+            self._done_signal = asyncio.Event()
             # create an event stream handler on the connection thread
             self.event_future = asyncio.run_coroutine_threadsafe(self._handle_event_stream(), self._conn.loop)
 
@@ -183,9 +183,9 @@ class EventHandler:
             callback = call_async(callback, self._robot, event_name, event_data, *args, **kwargs)
 
         if threading.current_thread() is thread:
-            future = asyncio.ensure_future(callback, loop=loop)
+            future = asyncio.ensure_future(callback)
         else:
-            future = asyncio.run_coroutine_threadsafe(callback, loop=loop)
+            future = asyncio.run_coroutine_threadsafe(callback)
         future.add_done_callback(self._done_callback)
 
     def _done_callback(self, completed_future):

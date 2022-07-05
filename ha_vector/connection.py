@@ -83,9 +83,9 @@ class _ControlEventManager:
     """
 
     def __init__(self, loop: asyncio.BaseEventLoop = None, priority: ControlPriorityLevel = None):
-        self._granted_event = asyncio.Event(loop=loop)
-        self._lost_event = asyncio.Event(loop=loop)
-        self._request_event = asyncio.Event(loop=loop)
+        self._granted_event = asyncio.Event()
+        self._lost_event = asyncio.Event()
+        self._request_event = asyncio.Event()
         self._has_control = False
         self._priority = priority
         self._is_shutdown = False
@@ -404,7 +404,7 @@ class Connection:
         if not isinstance(behavior_control_level, ControlPriorityLevel):
             raise TypeError("behavior_control_level must be of type ControlPriorityLevel")
         if self._thread is threading.current_thread():
-            return asyncio.ensure_future(self._request_control(behavior_control_level=behavior_control_level, timeout=timeout), loop=self._loop)
+            return asyncio.ensure_future(self._request_control(behavior_control_level=behavior_control_level, timeout=timeout))
         return self.run_coroutine(self._request_control(behavior_control_level=behavior_control_level, timeout=timeout))
 
     async def _request_control(self, behavior_control_level: ControlPriorityLevel = ControlPriorityLevel.DEFAULT_PRIORITY, timeout: float = 10.0):
@@ -435,7 +435,7 @@ class Connection:
         :param timeout: The time allotted to attempt to release control, in seconds.
         """
         if self._thread is threading.current_thread():
-            return asyncio.ensure_future(self._release_control(timeout=timeout), loop=self._loop)
+            return asyncio.ensure_future(self._release_control(timeout=timeout))
         return self.run_coroutine(self._release_control(timeout=timeout))
 
     async def _release_control(self, timeout: float = 10.0):
@@ -806,7 +806,7 @@ def on_connection_thread(log_messaging: bool = True, requires_control: bool = Tr
 
             if threading.current_thread() == self.conn.thread:
                 if self.conn.loop.is_running():
-                    return asyncio.ensure_future(wrapped_coroutine, loop=self.conn.loop)
+                    return asyncio.ensure_future(wrapped_coroutine)
                 raise VectorAsyncException("\n\nThe connection thread loop is not running, but a "
                                            "function '{}' is being invoked on that thread.\n".format(func.__name__ if hasattr(func, "__name__") else func))
             future = asyncio.run_coroutine_threadsafe(wrapped_coroutine, self.conn.loop)
