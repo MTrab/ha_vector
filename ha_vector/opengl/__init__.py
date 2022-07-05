@@ -41,7 +41,7 @@ Warning:
 
 import multiprocessing as mp
 
-from ha_vector.opengl import opengl_viewer
+from . import opengl_viewer
 
 
 def main(close_event: mp.Event,

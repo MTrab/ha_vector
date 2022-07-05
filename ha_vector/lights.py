@@ -32,7 +32,7 @@ __all__ = [
     "package_request_params",
 ]
 
-from ha_vector.color import Color, green, red, blue, cyan, magenta, yellow, white, off
+from .color import Color, green, red, blue, cyan, magenta, yellow, white, off
 
 
 class ColorProfile:

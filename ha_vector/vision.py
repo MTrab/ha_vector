@@ -26,8 +26,8 @@ __all__ = ['VisionComponent']
 
 from concurrent import futures
 
-from ha_vector import util, connection, events
-from ha_vector.messaging import protocol
+from . import util, connection, events
+from .messaging import protocol
 
 
 class VisionComponent(util.Component):  # pylint: disable=too-few-public-methods

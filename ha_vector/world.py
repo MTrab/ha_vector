@@ -25,13 +25,13 @@ __all__ = ["World"]
 from concurrent import futures
 from typing import Iterable
 
-from ha_vector import faces
-from ha_vector import connection
-from ha_vector import objects
-from ha_vector import util
+from . import faces
+from . import connection
+from . import objects
+from . import util
 
-from ha_vector.events import Events
-from ha_vector.messaging import protocol
+from .events import Events
+from .messaging import protocol
 
 
 class World(util.Component):

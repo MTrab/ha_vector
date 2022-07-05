@@ -59,7 +59,7 @@ import sys
 from typing import List
 
 from ha_vector import nav_map, util
-from ha_vector.opengl import opengl, opengl_vector
+from . import opengl, opengl_vector
 
 
 try:

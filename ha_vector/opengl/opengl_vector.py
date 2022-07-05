@@ -52,7 +52,7 @@ from typing import List
 from ha_vector.faces import Face
 from ha_vector.objects import CustomObject, FixedCustomObject, LightCube, ObservableObject
 from ha_vector import nav_map, util
-from ha_vector.opengl import opengl
+from . import opengl
 
 try:
     from OpenGL.GL import (

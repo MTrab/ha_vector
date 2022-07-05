@@ -37,10 +37,10 @@ from enum import Enum
 from logging import Logger
 from typing import List
 
-from ha_vector import util
-from ha_vector.events import Events
-from ha_vector.exceptions import VectorException
-from ha_vector.messaging import protocol
+from . import util
+from .events import Events
+from .exceptions import VectorException
+from .messaging import protocol
 
 
 class EvtNavMapUpdate():  # pylint: disable=too-few-public-methods

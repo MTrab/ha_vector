@@ -52,8 +52,8 @@ import sys
 import time
 from typing import Callable, Union
 
-from ha_vector.exceptions import VectorConfigurationException, VectorPropertyValueNotReadyException
-from ha_vector.messaging import protocol
+from .exceptions import VectorConfigurationException, VectorPropertyValueNotReadyException
+from .messaging import protocol
 
 try:
     from PIL import Image, ImageDraw

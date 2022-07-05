@@ -50,10 +50,10 @@ import collections
 import math
 import time
 
-from ha_vector import connection, lights, util
-from ha_vector.events import Events
+from . import connection, lights, util
+from .events import Events
 
-from ha_vector.messaging import protocol
+from .messaging import protocol
 
 #: Length of time in seconds to go without receiving an observed event before
 #: assuming that Vector can no longer see an object.

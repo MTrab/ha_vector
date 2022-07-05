@@ -35,8 +35,8 @@ from google.protobuf.text_format import MessageToString
 import grpc
 import aiogrpc
 
-from ha_vector import util
-from ha_vector.exceptions import (connection_error,
+from . import util
+from .exceptions import (connection_error,
                          VectorAsyncException,
                          VectorBehaviorControlException,
                          VectorConfigurationException,
@@ -44,8 +44,8 @@ from ha_vector.exceptions import (connection_error,
                          VectorControlTimeoutException,
                          VectorInvalidVersionException,
                          VectorNotFoundException)
-from ha_vector.messaging import client, protocol
-from ha_vector.version import __version__
+from .messaging import client, protocol
+from .version import __version__
 
 
 class ControlPriorityLevel(Enum):

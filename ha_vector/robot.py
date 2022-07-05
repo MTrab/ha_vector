@@ -27,19 +27,19 @@ __all__ = ['Robot', 'AsyncRobot']
 import concurrent
 import functools
 
-from ha_vector import (animation, audio, behavior, camera,
+from . import (animation, audio, behavior, camera,
                events, faces, motors, nav_map, screen,
                photos, proximity, status, touch,
                util, viewer, vision, world)
-from ha_vector.connection import (Connection,
+from .connection import (Connection,
                          on_connection_thread,
                          ControlPriorityLevel)
-from ha_vector.exceptions import (VectorNotReadyException,
+from .exceptions import (VectorNotReadyException,
                          VectorPropertyValueNotReadyException,
                          VectorUnreliableEventStreamException)
-from ha_vector.viewer import (ViewerComponent, Viewer3DComponent)
-from ha_vector.messaging import protocol
-from ha_vector.mdns import VectorMdns
+from .viewer import (ViewerComponent, Viewer3DComponent)
+from .messaging import protocol
+from .mdns import VectorMdns
 
 
 class Robot:

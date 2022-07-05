@@ -19,8 +19,8 @@ Control the motors of Vector.
 # __all__ should order by constants, event classes, other classes, functions.
 __all__ = ['MotorComponent']
 
-from ha_vector import connection, util
-from ha_vector.messaging import protocol
+from . import connection, util
+from .messaging import protocol
 
 
 class MotorComponent(util.Component):

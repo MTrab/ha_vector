@@ -24,8 +24,8 @@ __all__ = ['dimensions', 'convert_image_to_screen_data',
 
 import sys
 
-from ha_vector import color, connection, util
-from ha_vector.messaging import protocol
+from . import color, connection, util
+from .messaging import protocol
 
 try:
     from PIL import Image

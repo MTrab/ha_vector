@@ -25,9 +25,10 @@ import threading
 from typing import Callable
 import uuid
 
-from ha_vector.connection import Connection
-from ha_vector import util
-from ha_vector.messaging import protocol
+from .connection import Connection
+from . import util
+from .messaging import protocol
+
 
 
 class Events(Enum):

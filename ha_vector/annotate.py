@@ -49,9 +49,9 @@ except ImportError:
 except SyntaxError:
     sys.exit("SyntaxError: possible if accidentally importing old Python 2 version of PIL")
 
-from ha_vector import faces
-from ha_vector import objects
-from ha_vector import util
+from . import faces
+from . import objects
+from . import util
 
 
 DEFAULT_OBJECT_COLORS = {
