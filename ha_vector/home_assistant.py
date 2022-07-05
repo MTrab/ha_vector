@@ -177,6 +177,6 @@ class API:
         return self._guid.decode("utf-8")
 
     @property
-    def certificate(self) -> bytes:
+    def certificate(self) -> str:
         """Returns the certificate for this Vector."""
-        return self._cert
+        return str(self._cert)
