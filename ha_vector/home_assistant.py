@@ -87,10 +87,19 @@ class API:
 
     async def async_configure(self) -> None:
         """Do the required SDK configuration steps."""
+        await self._async_get_cert()
         await self._async_save_cert()
         await self._async_validate_cert_name()
         await self._async_get_session_token()
         await self._async_user_authentication()
+
+    async def _async_get_cert(self) -> bytes:
+        """Get Vector certificate."""
+        res = await self._client.get(f"{TOKEN_URL}{self._serial}")
+        if res.status != 200:
+            raise Exception("Could not get Vector certificate")
+
+        self._cert = await res.read()
 
     async def _async_save_cert(self) -> str:
         """Write Vector's certificate to a file located in the user's home directory"""
