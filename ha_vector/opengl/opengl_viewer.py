@@ -58,8 +58,8 @@ import multiprocessing as mp
 import sys
 from typing import List
 
-from .. import nav_map, util
-from . import opengl, opengl_vector
+from ha_vector import nav_map, util
+from ha_vector.opengl import opengl, opengl_vector
 
 
 try:

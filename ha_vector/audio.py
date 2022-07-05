@@ -29,10 +29,10 @@ from enum import Enum
 import time
 import wave
 from google.protobuf.text_format import MessageToString
-from . import util
-from .connection import on_connection_thread
-from .exceptions import VectorExternalAudioPlaybackException
-from .messaging import protocol
+from ha_vector import util
+from ha_vector.connection import on_connection_thread
+from ha_vector.exceptions import VectorExternalAudioPlaybackException
+from ha_vector.messaging import protocol
 
 
 MAX_ROBOT_AUDIO_CHUNK_SIZE = 1024  # 1024 is maximum, larger sizes will fail

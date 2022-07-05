@@ -39,9 +39,9 @@ __all__ = ["MAX_HEAD_ANGLE", "MIN_HEAD_ANGLE",
            "BehaviorComponent", "ReserveBehaviorControl"]
 
 
-from . import connection, faces, objects, util
-from .messaging import protocol
-from .exceptions import VectorException
+from ha_vector import connection, faces, objects, util
+from ha_vector.messaging import protocol
+from ha_vector.exceptions import VectorException
 from typing import Union
 
 # Constants

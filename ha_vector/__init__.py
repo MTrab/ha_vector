@@ -19,9 +19,9 @@ SDK for programming with the Anki Vector robot.
 import sys
 import logging
 
-from . import messaging
-from .robot import Robot, AsyncRobot
-from .version import __version__
+from ha_vector import messaging
+from ha_vector.robot import Robot, AsyncRobot
+from ha_vector.version import __version__
 
 logger = logging.getLogger("vector")  # pylint: disable=invalid-name
 

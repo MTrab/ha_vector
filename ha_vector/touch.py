@@ -24,9 +24,9 @@ being touched or not.  This flag is the same value used internally for petting d
 # __all__ should order by constants, event classes, other classes, functions.
 __all__ = ["TouchComponent", "TouchSensorData"]
 
-from . import util
-from .events import Events
-from .messaging import protocol
+from ha_vector import util
+from ha_vector.events import Events
+from ha_vector.messaging import protocol
 
 
 class TouchSensorData:

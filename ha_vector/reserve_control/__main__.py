@@ -23,7 +23,7 @@ High priority behaviors like returning to the charger in a low battery situation
 or retreating from a cliff will still take precedence.
 """
 
-from .. import behavior, util  # pylint: disable=relative-beyond-top-level
+from ha_vector import behavior, util  # pylint: disable=relative-beyond-top-level
 
 
 def hold_control():

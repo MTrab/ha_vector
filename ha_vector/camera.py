@@ -34,10 +34,10 @@ import io
 import time
 import sys
 
-from . import annotate, connection, util
-from .events import Events
-from .exceptions import VectorCameraFeedException
-from .messaging import protocol
+from ha_vector import annotate, connection, util
+from ha_vector.events import Events
+from ha_vector.exceptions import VectorCameraFeedException
+from ha_vector.messaging import protocol
 
 try:
     import numpy as np

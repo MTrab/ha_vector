@@ -22,8 +22,8 @@ __all__ = ["PhotographComponent"]
 import concurrent
 from typing import List
 
-from . import connection, util
-from .messaging import protocol
+from ha_vector import connection, util
+from ha_vector.messaging import protocol
 
 
 class PhotographComponent(util.Component):

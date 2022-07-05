@@ -31,8 +31,8 @@ __all__ = ['ROBOT_STATUS_NONE', 'ROBOT_STATUS_ARE_MOTORS_MOVING', 'ROBOT_STATUS_
            'ROBOT_STATUS_ARE_WHEELS_MOVING', 'ROBOT_STATUS_IS_BEING_HELD', 'ROBOT_STATUS_IS_ROBOT_MOVING',
            'RobotStatus']
 
-from . import util
-from .messaging import protocol
+from ha_vector import util
+from ha_vector.messaging import protocol
 
 ROBOT_STATUS_NONE = protocol.RobotStatus.Value("ROBOT_STATUS_NONE")
 ROBOT_STATUS_ARE_MOTORS_MOVING = protocol.RobotStatus.Value("ROBOT_STATUS_IS_MOVING")

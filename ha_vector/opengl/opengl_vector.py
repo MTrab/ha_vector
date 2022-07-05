@@ -49,10 +49,10 @@ import math
 import time
 from typing import List
 
-from ..faces import Face
-from ..objects import CustomObject, FixedCustomObject, LightCube, ObservableObject
-from .. import nav_map, util
-from . import opengl
+from ha_vector.faces import Face
+from ha_vector.objects import CustomObject, FixedCustomObject, LightCube, ObservableObject
+from ha_vector import nav_map, util
+from ha_vector.opengl import opengl
 
 try:
     from OpenGL.GL import (

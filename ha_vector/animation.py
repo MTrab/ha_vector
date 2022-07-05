@@ -35,8 +35,8 @@ import concurrent
 
 from google.protobuf import text_format
 
-from . import connection, exceptions, util
-from .messaging import protocol
+from ha_vector import connection, exceptions, util
+from ha_vector.messaging import protocol
 
 
 class AnimationComponent(util.Component):

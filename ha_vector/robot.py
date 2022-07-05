@@ -27,19 +27,19 @@ __all__ = ['Robot', 'AsyncRobot']
 import concurrent
 import functools
 
-from . import (animation, audio, behavior, camera,
+from ha_vector import (animation, audio, behavior, camera,
                events, faces, motors, nav_map, screen,
                photos, proximity, status, touch,
                util, viewer, vision, world)
-from .connection import (Connection,
+from ha_vector.connection import (Connection,
                          on_connection_thread,
                          ControlPriorityLevel)
-from .exceptions import (VectorNotReadyException,
+from ha_vector.exceptions import (VectorNotReadyException,
                          VectorPropertyValueNotReadyException,
                          VectorUnreliableEventStreamException)
-from .viewer import (ViewerComponent, Viewer3DComponent)
-from .messaging import protocol
-from .mdns import VectorMdns
+from ha_vector.viewer import (ViewerComponent, Viewer3DComponent)
+from ha_vector.messaging import protocol
+from ha_vector.mdns import VectorMdns
 
 
 class Robot:
@@ -799,11 +799,11 @@ class Robot:
     @on_connection_thread(requires_control=False)
     async def get_latest_attention_transfer(self) -> protocol.LatestAttentionTransferResponse:
         """Get the reason why the latest attention transfer failed, if any
-        
+
             Returns <AttentionTransfer> with the fields:
                 - reason <AttentionTransferReason>
                 - seconds_ago
-            
+
             .. testcode::
 
                 import anki_vector
@@ -834,9 +834,9 @@ class Robot:
     @on_connection_thread(requires_control=False)
     async def get_feature_flag(self, feature_name: str) -> protocol.FeatureFlagResponse:
         """Get the status of the given feature flag of the robot.
-            
+
         This let you check if a specific feature is valid and enabled (sufficiently developed to be used).
-        
+
         .. testcode::
 
                 import anki_vector
@@ -847,7 +847,7 @@ class Robot:
         """
         get_feature_flag = protocol.FeatureFlagRequest(feature_name= feature_name)
         return await self.conn.grpc_interface.GetFeatureFlag(get_feature_flag)
-    
+
     @on_connection_thread(requires_control=False)
     async def get_version_state(self) -> protocol.VersionStateResponse:
         """Get the versioning information for Vector, including Vector's os_version and engine_build_id.

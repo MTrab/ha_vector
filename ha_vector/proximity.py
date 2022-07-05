@@ -24,9 +24,9 @@ The distance sensor can be used to detect objects in front of the robot.
 # __all__ should order by constants, event classes, other classes, functions.
 __all__ = ["ProximityComponent", "ProximitySensorData"]
 
-from . import util
-from .events import Events
-from .messaging import protocol
+from ha_vector import util
+from ha_vector.events import Events
+from ha_vector.messaging import protocol
 
 
 class ProximitySensorData:

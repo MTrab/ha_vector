@@ -27,8 +27,8 @@ try:
 except ImportError:
     sys.exit("Cannot import from PIL: Do `pip3 install --user Pillow` to install")
 
-from . import util
-from .events import Events
+from ha_vector import util
+from ha_vector.events import Events
 
 
 class ViewerComponent(util.Component):
@@ -73,7 +73,7 @@ class ViewerComponent(util.Component):
         :param timeout: Render video for the given time. (Renders forever, if timeout not given.)
         :param force_on_top: Specifies whether the window should be forced on top of all others.
         """
-        from . import camera_viewer
+        from ha_vector import camera_viewer
 
         self.robot.camera.init_camera_feed()
 
@@ -219,7 +219,7 @@ class Viewer3DComponent(util.Component):
 
         :param show_viewer_controls: Specifies whether to draw controls on the view.
         """
-        from . import opengl
+        from ha_vector import opengl
         ctx = mp.get_context('spawn')
         self._close_event = ctx.Event()
         self._input_intent_queue = ctx.Queue(maxsize=10)
@@ -375,7 +375,7 @@ class Viewer3DComponent(util.Component):
             We can safely capture any robot and world state here, and push to OpenGL
             (main) process via a multiprocessing queue.
         """
-        from .opengl import opengl_vector
+        from ha_vector.opengl import opengl_vector
         world_frame = opengl_vector.WorldRenderFrame(robot, self.connecting_to_cube)
         queue = self._world_frame_queue
         if queue:

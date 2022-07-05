@@ -18,7 +18,7 @@ SDK-specific exception classes for Vector.
 
 from grpc import RpcError, StatusCode
 
-from .messaging import protocol
+from ha_vector.messaging import protocol
 
 # __all__ should order by constants, event classes, other classes, functions.
 __all__ = ['VectorAsyncException',

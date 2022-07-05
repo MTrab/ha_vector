@@ -30,8 +30,8 @@ __all__ = ['Expression', 'Face', 'FaceComponent']
 from enum import Enum
 from typing import List
 
-from . import connection, util, objects, events
-from .messaging import protocol
+from ha_vector import connection, util, objects, events
+from ha_vector.messaging import protocol
 
 #: Length of time in seconds to go without receiving an observed event before
 #: assuming that Vector can no longer see a face.
