@@ -107,7 +107,7 @@ class API:
     async def _async_save_cert(self) -> str:
         """Write Vector's certificate to a file located in the user's home directory"""
         os.makedirs(str(self._settings_dir), exist_ok=True)
-        self._cert_file = str(self._settings_dir / f"{self._name}-{self._serial}.cert")
+        self._cert_file = str(self._settings_dir + "/" + f"{self._name}-{self._serial}.cert")
         with os.fdopen(
             os.open(self._cert_file, os.O_WRONLY | os.O_CREAT, 0o600), "wb"
         ) as file:
@@ -202,8 +202,7 @@ class API:
 
     async def _async_write_config(self, clear: bool = True):
         """Write config to sdk_config.ini."""
-        home = Path.home()
-        config_file = str(home / "..anki_vector" / "sdk_config.ini")
+        config_file = str(self._settings_dir + "/sdk_config.ini")
 
         config = configparser.ConfigParser(strict=False)
 

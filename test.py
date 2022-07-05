@@ -7,8 +7,8 @@ from ha_vector.home_assistant import API
 SETTINGS_DIR = "./.vector"
 
 
-async def async_run():
-    async with aiohttp.ClilentSession() as session:
+async def main():
+    async with aiohttp.ClientSession() as session:
         vector_api = API(
             environ["EMAIL"],
             environ["PASSWORD"],
@@ -21,4 +21,5 @@ async def async_run():
 
         await vector_api.async_configure()
 
-asyncio.run(async_run)
+
+asyncio.run(main())
