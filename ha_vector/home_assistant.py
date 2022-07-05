@@ -49,7 +49,7 @@ class API:
         name: str,
         serial: str,
         ipaddress: str,
-        settings_dir: str,
+        cert_path: str,
         client,
     ):
         """Initialize instance."""
@@ -60,7 +60,7 @@ class API:
         self._name = name
         self._password = password
         self._serial = serial
-        self._settings_dir = settings_dir
+        self._cert_path = cert_path
 
         # Vars used in the API integration
         self._cert = None
@@ -87,29 +87,38 @@ class API:
 
     async def async_configure(self) -> None:
         """Do the required SDK configuration steps."""
-        await self._async_get_cert()
+        await self._async_save_cert()
         await self._async_validate_cert_name()
         await self._async_get_session_token()
         await self._async_user_authentication()
 
-    async def _async_get_cert(self) -> bytes:
-        """Get Vector certificate."""
-        res = await self._client.get(f"{TOKEN_URL}{self._serial}")
-        if res.status != 200:
-            raise Exception("Could not get Vector certificate")
-
-        self._cert = await res.read()
-        return self._cert
+    async def _async_save_cert(self) -> str:
+        """Write Vector's certificate to a file located in the user's home directory"""
+        os.makedirs(str(self._cert_path), exist_ok=True)
+        self._cert_file = str(
+            self._cert_path + "/" + f"{self._name}-{self._serial}.cert"
+        )
+        with os.fdopen(
+            os.open(self._cert_file, os.O_WRONLY | os.O_CREAT, 0o600), "wb"
+        ) as file:
+            file.write(self._cert)
+        return self._cert_file
 
     async def _async_validate_cert_name(self):
         """Validate the name on Vector's certificate against the user-provided name"""
-        cert = x509.load_pem_x509_certificate(self._cert, default_backend())
-        for fields in cert.subject:
-            current = str(fields.oid)
-            if "commonName" in current:
-                common_name = fields.value
-                if common_name != self._name:
-                    raise Exception(f"The certificate specified is not valid!")
+        with open(self._cert_file, "rb") as file:
+            cert_file = file.read()
+            cert = x509.load_pem_x509_certificate(cert_file, default_backend())
+            for fields in cert.subject:
+                current = str(fields.oid)
+                if "commonName" in current:
+                    common_name = fields.value
+                    if common_name != self._name:
+                        raise Exception(
+                            f"The name of the certificate ({common_name}) does "
+                            "not match the name provided ({self._name}).\n"
+                            "Please verify the name, and try again."
+                        )
 
     async def _async_get_session_token(self) -> str:
         """Get Vector session token."""
@@ -125,6 +134,7 @@ class API:
 
     async def _async_user_authentication(self) -> str:
         """Authenticate against the API."""
+        # Pin the robot certificate for opening the channel
         creds = grpc.ssl_channel_credentials(root_certificates=self._cert)
 
         channel = grpc.secure_channel(
@@ -173,10 +183,10 @@ class API:
 
     @property
     def guid(self) -> str:
-        """Return the GUID for the Vector in UTF-8 encoding."""
-        return self._guid.decode("utf-8")
+        """Return the GUID for this Vector."""
+        return self._guid
 
     @property
     def certificate(self) -> str:
-        """Returns the certificate for this Vector."""
-        return str(self._cert)
+        """Returns the certificate file and path for this Vector."""
+        return self._cert_file
