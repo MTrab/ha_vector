@@ -193,9 +193,9 @@ class API:
     @property
     def guid(self) -> str:
         """Return the GUID for this Vector."""
-        return self._guid
+        return str(self._guid)
 
     @property
     def certificate(self) -> str:
         """Returns the certificate file and path for this Vector."""
-        return self._cert_file
+        return str(self._cert_file)
