@@ -23,15 +23,13 @@ High priority behaviors like returning to the charger in a low battery situation
 or retreating from a cliff will still take precedence.
 """
 
-from ha_vector import behavior, util  # pylint: disable=relative-beyond-top-level
+from anki_vector import behavior, util
 
 
 def hold_control():
     args = util.parse_command_args()
     with behavior.ReserveBehaviorControl(args.serial):
-        input(
-            "Vector behavior control reserved for SDK.  Hit 'Enter' to release control."
-        )
+        input("Vector behavior control reserved for SDK.  Hit 'Enter' to release control.")
 
 
 if __name__ == "__main__":
