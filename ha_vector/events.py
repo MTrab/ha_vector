@@ -251,12 +251,8 @@ class EventHandler:
             async for evt in self._conn.grpc_interface.EventStream(req):
                 if not self.listening_for_events:
                     break
-                try:
-                    unpackaged_event_key, unpackaged_event_data = self._unpackage_event('event_type', evt.event)
-                    await self.dispatch_event_by_name(unpackaged_event_data, unpackaged_event_key)
-                except TypeError:
-                    pass
-                    # self.logger.warning('Unknown Event type')
+                unpackaged_event_key, unpackaged_event_data = self._unpackage_event('event_type', evt.event)
+                await self.dispatch_event_by_name(unpackaged_event_data, unpackaged_event_key)
         except CancelledError:
             self.logger.debug('Event handler task was cancelled. This is expected during disconnection.')
 
