@@ -128,7 +128,7 @@ class Robot:
         self.logger = util.get_class_logger(__name__, self)
         self._force_async = False
         config = config if config is not None else {}
-        config = {**util.read_configuration(serial, name, self.logger, escape_pod or False), **config}
+        # config = {**util.read_configuration(serial, name, self.logger, escape_pod or False), **config}
         escape_pod = config.get("escape_pod", False) if escape_pod is None else escape_pod
 
         if name is not None:
