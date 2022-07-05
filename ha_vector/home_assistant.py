@@ -88,11 +88,9 @@ class API:
     async def async_configure(self) -> None:
         """Do the required SDK configuration steps."""
         await self._async_get_cert()
-        await self._async_save_cert()
         await self._async_validate_cert_name()
         await self._async_get_session_token()
         await self._async_user_authentication()
-        await self._async_write_config()
 
     async def _async_get_cert(self) -> bytes:
         """Get Vector certificate."""
@@ -103,31 +101,15 @@ class API:
         self._cert = await res.read()
         return self._cert
 
-    async def _async_save_cert(self) -> str:
-        """Write Vector's certificate to a file located in the user's home directory"""
-        os.makedirs(str(self._settings_dir), exist_ok=True)
-        self._cert_file = str(self._settings_dir + "/" + f"{self._name}-{self._serial}.cert")
-        with os.fdopen(
-            os.open(self._cert_file, os.O_WRONLY | os.O_CREAT, 0o600), "wb"
-        ) as file:
-            file.write(self._cert)
-        return self._cert_file
-
     async def _async_validate_cert_name(self):
         """Validate the name on Vector's certificate against the user-provided name"""
-        with open(self._cert_file, "rb") as file:
-            cert_file = file.read()
-            cert = x509.load_pem_x509_certificate(cert_file, default_backend())
-            for fields in cert.subject:
-                current = str(fields.oid)
-                if "commonName" in current:
-                    common_name = fields.value
-                    if common_name != self._name:
-                        raise Exception(
-                            f"The name of the certificate ({common_name}) does "
-                            "not match the name provided ({self._name}).\n"
-                            "Please verify the name, and try again."
-                        )
+        cert = x509.load_pem_x509_certificate(self._cert, default_backend())
+        for fields in cert.subject:
+            current = str(fields.oid)
+            if "commonName" in current:
+                common_name = fields.value
+                if common_name != self._name:
+                    raise Exception(f"The certificate specified is not valid!")
 
     async def _async_get_session_token(self) -> str:
         """Get Vector session token."""
@@ -136,20 +118,13 @@ class API:
         res = await self._client.post(
             self._handler.url, data=payload, headers=self._handler.headers
         )
-        print(self._handler.url)
-        print(self._handler.headers)
-        print(payload)
-        print(res.status)
-        print(res)
         if res.status != 200:
             raise Exception("Error fetching session token.")
 
         self._token = await res.json(content_type="text/json")
-        return self._token
 
     async def _async_user_authentication(self) -> str:
         """Authenticate against the API."""
-        # Pin the robot certificate for opening the channel
         creds = grpc.ssl_channel_credentials(root_certificates=self._cert)
 
         channel = grpc.secure_channel(
@@ -180,7 +155,6 @@ class API:
                 user_session_id=self._token["session"]["session_token"].encode("utf-8"),
                 client_name=socket.gethostname().encode("utf-8"),
             )
-            print(request)
             response = interface.UserAuthentication(request)
             if (
                 response.code
@@ -196,39 +170,13 @@ class API:
             ) from err
 
         self._guid = response.client_token_guid
-        print(self._guid)
-        return self._guid
 
-    async def _async_write_config(self, clear: bool = True):
-        """Write config to sdk_config.ini."""
-        config_file = str(self._settings_dir + "/sdk_config.ini")
+    @property
+    def guid(self) -> str:
+        """Return the GUID for the Vector in UTF-8 encoding."""
+        return self._guid.decode("utf-8")
 
-        config = configparser.ConfigParser(strict=False)
-
-        try:
-            config.read(config_file)
-        except configparser.ParsingError:
-            if os.path.exists(config_file):
-                os.rename(config_file, config_file + "-error")
-        if clear:
-            config[self._serial] = {}
-
-        config[self._serial]["cert"] = self._cert_file
-        config[self._serial]["ip"] = self._ip
-        config[self._serial]["name"] = self._name
-        config[self._serial]["guid"] = self._guid.decode("utf-8")
-        temp_file = config_file + "-temp"
-        if os.path.exists(config_file):
-            os.rename(config_file, temp_file)
-        try:
-            with os.fdopen(
-                os.open(config_file, os.O_WRONLY | os.O_CREAT, 0o600), "w"
-            ) as conf_file:
-                config.write(conf_file)
-        except Exception as err:
-            if os.path.exists(temp_file):
-                os.rename(temp_file, config_file)
-            raise err
-        else:
-            if os.path.exists(temp_file):
-                os.remove(temp_file)
+    @property
+    def certificate(self) -> bytes:
+        """Returns the certificate for this Vector."""
+        return self._cert
