@@ -313,6 +313,7 @@ class Connection:
             )
 
         self._ready_signal.clear()
+        self._done_signal.clear()
         self._thread = threading.Thread(
             target=self._connect,
             args=(timeout, self._on_connected),
