@@ -350,6 +350,11 @@ class Robot:
             self._enable_nav_map_feed = True
 
     @property
+    def force_async(self) -> bool:
+        """A flag used to determine if this is a :class:`Robot` or :class:`AsyncRobot`."""
+        return True
+
+    @property
     def conn(self) -> Connection:
         """A reference to the :class:`~anki_vector.connection.Connection` instance."""
         return self._conn

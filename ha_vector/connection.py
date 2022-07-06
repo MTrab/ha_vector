@@ -202,8 +202,6 @@ class Connection:
         self.active_commands = []
         self._logger = logger
 
-        self.force_async = True
-
     @property
     def loop(self) -> AbstractEventLoop:
         """Returns the loop running inside the connection thread."""
