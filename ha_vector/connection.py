@@ -313,7 +313,7 @@ class Connection:
             )
 
         self._ready_signal.clear()
-        self._done_signal.clear()
+
         self._thread = threading.Thread(
             target=self._connect,
             args=(timeout, self._on_connected),
@@ -346,7 +346,7 @@ class Connection:
                 )
             self._loop = asyncio.new_event_loop()
             asyncio.set_event_loop(self._loop)
-            self._done_signal = asyncio.Event()
+            self._done_signal = asyncio.Event().clear()
             if not self._behavior_control_level:
                 self._control_events = _ControlEventManager(self._loop)
             else:
