@@ -437,7 +437,6 @@ class Connection:
             )
             self._loop.run_until_complete(self._interface.SDKInitialization(initialize))
 
-            print("Checkpoint")
             self._logger.debug("We are here")
             if not isinstance(self._behavior_control_level, type(None)):
                 self._loop.run_until_complete(
@@ -462,7 +461,9 @@ class Connection:
         try:
 
             async def wait_until_done():
-                return await self._done_signal.wait()
+                while not self._done_signal:
+                    pass
+                # return await self._done_signal.wait()
 
             self._loop.run_until_complete(wait_until_done())
         finally:
