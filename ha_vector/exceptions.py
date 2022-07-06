@@ -39,8 +39,12 @@ __all__ = ['VectorAsyncException',
            'VectorUnavailableException',
            'VectorUnimplementedException',
            'VectorExternalAudioPlaybackException',
-           'connection_error']
+           'connection_error',
+           'VectorHomeAssistantEscapepodException']
 
+
+class VectorHomeAssistantEscapepodException(Exception):
+    """Escape pos exception."""
 
 class VectorException(Exception):
     """Base class of all Vector SDK exceptions."""
