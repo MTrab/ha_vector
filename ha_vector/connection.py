@@ -180,7 +180,8 @@ class Connection:
         guid: str,
         loop: AbstractEventLoop,
         escape_pod: bool = False,
-        behavior_control_level: ControlPriorityLevel = ControlPriorityLevel.DEFAULT_PRIORITY,
+        behavior_control_level: ControlPriorityLevel = ControlPriorityLevel.NONE,
+        logger: Any | None = None,
     ):
         self._loop = loop
         self.name = name
@@ -199,6 +200,7 @@ class Connection:
         self._conn_exception = False
         self._behavior_control_level = behavior_control_level
         self.active_commands = []
+        self._logger = logger
 
     @property
     def loop(self) -> AbstractEventLoop:

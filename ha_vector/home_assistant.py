@@ -292,6 +292,7 @@ class Robot:
             escape_pod=self._escape_pod,
             behavior_control_level=behavior_control_level,
             loop=self._loop,
+            logger=self.logger,
         )
 
         self._events = events.EventHandler(self)
