@@ -444,6 +444,7 @@ class Connection:
                         timeout=timeout,
                     )
                 )
+            self._logger.debug("We reached this point")
         except grpc.RpcError as rpc_error:  # pylint: disable=broad-except
             setattr(self._ready_signal, "exception", connection_error(rpc_error))
             self._loop.close()
