@@ -437,14 +437,15 @@ class Connection:
             )
             self._loop.run_until_complete(self._interface.SDKInitialization(initialize))
 
-            if self._behavior_control_level:
+            print("Checkpoint")
+            self._logger.debug("We are here")
+            if not isinstance(self._behavior_control_level, type(None)):
                 self._loop.run_until_complete(
                     self._request_control(
                         behavior_control_level=self._behavior_control_level,
                         timeout=timeout,
                     )
                 )
-            self._logger.debug("We reached this point")
         except grpc.RpcError as rpc_error:  # pylint: disable=broad-except
             setattr(self._ready_signal, "exception", connection_error(rpc_error))
             self._loop.close()
