@@ -315,12 +315,16 @@ class Connection:
         self._ready_signal.clear()
         self._thread = threading.Thread(
             target=self._connect,
-            args=(timeout,),
+            args=(timeout, self._on_connected),
             daemon=True,
-            name="gRPC Connection Handler Thread",
+            name="Connection Handler Thread",
         )
+
         self._thread.start()
-        ready = self._ready_signal.wait(timeout=4 * timeout)
+
+    def _on_connected(self):
+        """Callback when connection initialization is done."""
+        ready = self._ready_signal
 
         if not ready:
             raise VectorNotFoundException()
@@ -330,7 +334,7 @@ class Connection:
             delattr(self._ready_signal, "exception")
             raise e
 
-    def _connect(self, timeout: float) -> None:
+    def _connect(self, timeout: float, callback=lambda: None) -> None:
         """The function that runs on the connection thread. This will connect to Vector,
         and establish the BehaviorControl stream.
         """
@@ -451,6 +455,7 @@ class Connection:
             return
         finally:
             self._ready_signal.set()
+            callback()
 
         try:
 
