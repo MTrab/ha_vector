@@ -461,7 +461,7 @@ class Connection:
         try:
 
             async def wait_until_done():
-                while not self._done_signal:
+                while not self._done_signal.is_set:
                     pass
                 # return await self._done_signal.wait()
 
