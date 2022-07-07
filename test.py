@@ -2,6 +2,7 @@ import asyncio
 from os import environ
 import aiohttp
 
+import ha_vector
 from ha_vector.home_assistant import API
 from ha_vector.robot import AsyncRobot
 
@@ -28,6 +29,7 @@ async def main():
         "guid": vector_api.guid.replace("b'", "").replace("'", ""),
     }
 
+
     robot = AsyncRobot(
         # with Robot(
         environ["SERIAL"],
@@ -47,6 +49,7 @@ async def main():
     # )
     # robot.conn.release_control(timeout=1.0)
     robot.connect()
+
     print("Getting battery states")
     print(robot.get_battery_state().result())
 

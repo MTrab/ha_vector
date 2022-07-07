@@ -366,3 +366,4 @@ FodyWeavers.xsd
 build/
 __pycache__/
 .env
+.env.py
