@@ -122,6 +122,7 @@ class EventHandler:
         self._loop: asyncio.BaseEventLoop = None
         self.subscribers = {}
         self._done_signal: asyncio.Event = None
+        self.logger.debug(self)
 
     def start(self, connection: Connection):
         """Start listening for events. Automatically called by the :class:`anki_vector.robot.Robot` class.
