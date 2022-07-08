@@ -495,6 +495,8 @@ class Connection:
             self._has_control = await asyncio.wait_for(
                 self.control_lost_event.wait(), timeout
             )
+        except asyncio.exceptions.TimeoutError:
+            pass # Ignore asyncio timeout in release_control request.
         except futures.TimeoutError as e:
             raise VectorControlTimeoutException(
                 f"Surpassed timeout of {timeout}s"
