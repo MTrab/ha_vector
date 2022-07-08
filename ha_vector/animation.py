@@ -131,14 +131,14 @@ class AnimationComponent(util.Component):
 
     async def _load_animation_list(self):
         req = protocol.ListAnimationsRequest()
-        result = await self.grpc_interface.ListAnimations(req, timeout=10)
+        result = await self.grpc_interface.ListAnimations(req)
         self.logger.debug(f"Animation List status={text_format.MessageToString(result.status, as_one_line=True)}, number of animations={len(result.animation_names)}")
         self._anim_dict = {a.name: a for a in result.animation_names}
         return result
 
     async def _load_animation_trigger_list(self):
         req = protocol.ListAnimationTriggersRequest()
-        result = await self.grpc_interface.ListAnimationTriggers(req, timeout=10)
+        result = await self.grpc_interface.ListAnimationTriggers(req)
         self.logger.debug(f"Animation Triggers List status={text_format.MessageToString(result.status, as_one_line=True)}, number of animation_triggers={len(result.animation_trigger_names)}")
         self._anim_trigger_dict = {a.name: a for a in result.animation_trigger_names}
         return result
@@ -165,10 +165,7 @@ class AnimationComponent(util.Component):
                 for anim_name in anim_names:
                     print(anim_name)
         """
-        try:
-            return await self._load_animation_list()
-        except:
-            return await self._load_animation_list()
+        return await self._load_animation_list()
 
     @connection.on_connection_thread(log_messaging=False, requires_control=False)
     async def load_animation_trigger_list(self):
@@ -191,12 +188,8 @@ class AnimationComponent(util.Component):
                 for anim_trigger_name in anim_trigger_names:
                     print(anim_trigger_name)
         """
-        try:
-            return await self._load_animation_trigger_list()
-        except:
-            return await self._load_animation_trigger_list()
+        return await self._load_animation_trigger_list()
 
-    # TODO: add return type hint
     @connection.on_connection_thread()
     async def play_animation_trigger(self, anim_trigger: str, loop_count: int = 1, use_lift_safe: bool = False, ignore_body_track: bool = False, ignore_head_track: bool = False, ignore_lift_track: bool = False):  # START
         """Starts an animation trigger playing on a robot.
@@ -234,7 +227,6 @@ class AnimationComponent(util.Component):
                                                    ignore_lift_track=ignore_lift_track)
         return await self.grpc_interface.PlayAnimationTrigger(req)
 
-    # TODO: add return type hint
     @connection.on_connection_thread()
     async def play_animation(self, anim: str, loop_count: int = 1, ignore_body_track: bool = False, ignore_head_track: bool = False, ignore_lift_track: bool = False):
         """Starts an animation playing on a robot.

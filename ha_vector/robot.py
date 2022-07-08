@@ -22,24 +22,42 @@ caller may use to obtain the result when they desire.
 """
 
 # __all__ should order by constants, event classes, other classes, functions.
-__all__ = ['Robot', 'AsyncRobot']
+from __future__ import annotations
+import asyncio
+
+__all__ = ["Robot", "AsyncRobot"]
 
 import concurrent
 import functools
+from typing import Any
 
-from . import (animation, audio, behavior, camera,
-               events, faces, motors, nav_map, screen,
-               photos, proximity, status, touch,
-               util, viewer, vision, world)
-from .connection import (Connection,
-                         on_connection_thread,
-                         ControlPriorityLevel)
-from .exceptions import (VectorNotReadyException,
-                         VectorPropertyValueNotReadyException,
-                         VectorUnreliableEventStreamException)
-from .viewer import (ViewerComponent, Viewer3DComponent)
+from . import (
+    animation,
+    audio,
+    behavior,
+    camera,
+    events,
+    faces,
+    motors,
+    nav_map,
+    screen,
+    photos,
+    proximity,
+    status,
+    touch,
+    util,
+    viewer,
+    vision,
+    world,
+)
+from .connection import Connection, on_connection_thread, ControlPriorityLevel
+from .exceptions import (
+    VectorNotReadyException,
+    VectorPropertyValueNotReadyException,
+    VectorUnreliableEventStreamException,
+)
+from .viewer import ViewerComponent, Viewer3DComponent
 from .messaging import protocol
-from .mdns import VectorMdns
 
 
 class Robot:
@@ -106,56 +124,69 @@ class Robot:
                                 :code:`None` if behavior control is not needed.
                                 See :class:`ControlPriorityLevel` for more information."""
 
-    def __init__(self,
-                 serial: str = None,
-                 ip: str = None,
-                 name: str = None,
-                 config: dict = None,
-                 escape_pod: bool = None,
-                 default_logging: bool = True,
-                 behavior_activation_timeout: int = 10,
-                 cache_animation_lists: bool = True,
-                 enable_face_detection: bool = False,
-                 estimate_facial_expression: bool = False,
-                 enable_audio_feed: bool = False,
-                 enable_custom_object_detection: bool = False,
-                 enable_nav_map_feed: bool = None,
-                 show_viewer: bool = False,
-                 show_3d_viewer: bool = False,
-                 behavior_control_level: ControlPriorityLevel = ControlPriorityLevel.DEFAULT_PRIORITY):
+    def __init__(
+        self,
+        serial: str,
+        ip_address: str,
+        name: str,
+        config: dict,
+        escape_pod: bool = False,
+        logger: Any | None = None,
+        behavior_activation_timeout: int = 10,
+        cache_animation_lists: bool = False,
+        enable_face_detection: bool = True,
+        estimate_facial_expression: bool = True,
+        enable_audio_feed: bool = False,
+        enable_custom_object_detection: bool = False,
+        enable_nav_map_feed: bool | None = None,
+        show_viewer: bool = False,
+        show_3d_viewer: bool = False,
+        behavior_control_level: ControlPriorityLevel | None = None,
+        force_async: bool = False,
+        default_logging: bool = False,
+    ):
         if default_logging:
             util.setup_basic_logging()
         self.logger = util.get_class_logger(__name__, self)
-        self._force_async = False
-        config = config if config is not None else {}
-        # config = {**util.read_configuration(serial, name, self.logger, escape_pod or False), **config}
-        escape_pod = config.get("escape_pod", False) if escape_pod is None else escape_pod
-
-        if name is not None:
-            vector_mdns = VectorMdns.find_vector(name)
-
-            if vector_mdns is not None:
-                ip = vector_mdns['ipv4']
+        self._config = config
+        self._loop = asyncio.get_running_loop()
+        self._force_async = force_async
 
         self._escape_pod = escape_pod
-        self._name = config["name"] if 'name' in config else None
-        self._cert_file = config["cert"] if 'cert' in config else None
-        self._guid = config["guid"] if 'guid' in config else None
-        self._port = config["port"] if 'port' in config else "443"
-        self._ip = ip or config.get("ip")
-        if self._ip is None and 'ip' in config:
-            self._ip = config["ip"]
+        self._name = self._config["name"] if "name" in self._config else name
+        self._cert_file = self._config["cert"] if "cert" in self._config else None
+        self._guid = (
+            self._config["guid"].replace("b'", "").replace("'", "")
+            if "guid" in self._config
+            else None
+        )
+        self._port = self._config["port"] if "port" in self._config else "443"
+        self._ip = self._config["ip"] if "ip" in self._config else ip_address
+        self._serial = self._config["serial"] if "serial" in self._config else serial
 
-        if (not escape_pod) and (self._name is None or self._ip is None or self._cert_file is None or self._guid is None):
-            raise ValueError("The Robot object requires a serial and for Vector to be logged in (using the app then running the `python3 -m anki_vector.configure`).\n"
-                             "You may also provide the values necessary for connection through the config parameter. ex: "
-                             '{"name":"Vector-XXXX", "ip":"XX.XX.XX.XX", "cert":"/path/to/cert_file", "guid":"<secret_key>"}')
+        if escape_pod:
+            raise ValueError("Escape Pod is currently not supported!")
 
-        if (escape_pod) and (self._ip is None):
-            raise ValueError('Could not find the sdk configuration file. Please run `python3 -m anki_vector.configure_pod` to set up your Vector for SDK usage.')
+        if (
+            self._name is None
+            or self._ip is None
+            or self._cert_file is None
+            or self._guid is None
+        ):
+            raise ValueError(
+                "The Robot object requires a serial and for Vector to be logged in (using the app then running the anki_vector.configure executable submodule).\n"
+                "You may also provide the values necessary for connection through the config parameter. ex: "
+                '{"name":"Vector-XXXX", "ip":"XX.XX.XX.XX", "cert":"/path/to/cert_file", "guid":"<secret_key>"}'
+            )
 
         #: :class:`anki_vector.connection.Connection`: The active connection to the robot.
-        self._conn = Connection(self._name, ':'.join([self._ip, self._port]), self._cert_file, self._guid, self._escape_pod, behavior_control_level=behavior_control_level)
+        self._conn = Connection(
+            self._name,
+            ":".join([self._ip, self._port]),
+            self._cert_file,
+            self._guid,
+            behavior_control_level=behavior_control_level,
+        )
         self._events = events.EventHandler(self)
 
         # placeholders for components before they exist
@@ -205,7 +236,9 @@ class Robot:
         self._show_viewer = show_viewer
         self._show_3d_viewer = show_3d_viewer
         if show_3d_viewer and enable_nav_map_feed is None:
-            self.logger.warning("enable_nav_map_feed should be True for 3d viewer to render correctly.")
+            self.logger.warning(
+                "enable_nav_map_feed should be True for 3d viewer to render correctly."
+            )
             self._enable_nav_map_feed = True
 
     @property
@@ -610,10 +643,16 @@ class Robot:
 
     # Unpack streamed data to robot's internal properties
     def _unpack_robot_state(self, _robot, _event_type, msg):
-        self._pose = util.Pose(x=msg.pose.x, y=msg.pose.y, z=msg.pose.z,
-                               q0=msg.pose.q0, q1=msg.pose.q1,
-                               q2=msg.pose.q2, q3=msg.pose.q3,
-                               origin_id=msg.pose.origin_id)
+        self._pose = util.Pose(
+            x=msg.pose.x,
+            y=msg.pose.y,
+            z=msg.pose.z,
+            q0=msg.pose.q0,
+            q1=msg.pose.q1,
+            q2=msg.pose.q2,
+            q3=msg.pose.q3,
+            origin_id=msg.pose.origin_id,
+        )
         self._pose_angle_rad = msg.pose_angle_rad
         self._pose_pitch_rad = msg.pose_pitch_rad
         self._left_wheel_speed_mmps = msg.left_wheel_speed_mmps
@@ -687,35 +726,31 @@ class Robot:
 
         # Enable face detection, to allow Vector to add faces to its world view
         if self.conn.requires_behavior_control:
-            face_detection = self.vision.enable_face_detection(detect_faces=self.enable_face_detection, estimate_expression=self.estimate_facial_expression)
+            face_detection = self.vision.enable_face_detection(
+                detect_faces=self.enable_face_detection,
+                estimate_expression=self.estimate_facial_expression,
+            )
             if isinstance(face_detection, concurrent.futures.Future):
                 face_detection.result()
-            object_detection = self.vision.enable_custom_object_detection(detect_custom_objects=self.enable_custom_object_detection)
+            object_detection = self.vision.enable_custom_object_detection(
+                detect_custom_objects=self.enable_custom_object_detection
+            )
             if isinstance(object_detection, concurrent.futures.Future):
                 object_detection.result()
 
         # Subscribe to a callback that updates the robot's local properties
-        self.events.subscribe(self._unpack_robot_state,
-                              events.Events.robot_state,
-                              _on_connection_thread=True)
-
-        # get the camera configuration from the robot
-        response = self._camera.get_camera_config()
-        if isinstance(response, concurrent.futures.Future):
-            response = response.result()
-        self._camera.set_config(response)
-
-        # Subscribe to a callback for camera exposure settings
-        self.events.subscribe(self._camera.update_state,
-                              events.Events.camera_settings_update,
-                              _on_connection_thread=True)
+        self.events.subscribe(
+            self._unpack_robot_state,
+            events.Events.robot_state,
+            _on_connection_thread=True,
+        )
 
         # access the pose to prove it has gotten back from the event stream once
-        # try:
-        #     if not self.pose:
-        #         pass
-        # except VectorPropertyValueNotReadyException as e:
-        #     raise VectorUnreliableEventStreamException() from e
+        try:
+            if not self.pose:
+                pass
+        except VectorPropertyValueNotReadyException as e:
+            raise VectorUnreliableEventStreamException() from e
 
     def disconnect(self) -> None:
         """Close the connection with Vector.
@@ -811,6 +846,62 @@ class Robot:
         """
         get_battery_state_request = protocol.BatteryStateRequest()
         return await self.conn.grpc_interface.BatteryState(get_battery_state_request)
+
+    @on_connection_thread(requires_control=False)
+    async def get_latest_attention_transfer(
+        self,
+    ) -> protocol.LatestAttentionTransferResponse:
+        """Get the reason why the latest attention transfer failed, if any
+
+        Returns <AttentionTransfer> with the fields:
+            - reason <AttentionTransferReason>
+            - seconds_ago
+
+        .. testcode::
+
+            import anki_vector
+            with anki_vector.Robot() as robot:
+                att_trans = robot.get_latest_attention_transfer()
+                if att_trans:
+                    print("Last attention transfer failed because of: {0}".format(att_trans.reason))
+        """
+        latest_attention_transfer = protocol.LatestAttentionTransferRequest()
+        return await self.conn.grpc_interface.GetLatestAttentionTransfer(
+            latest_attention_transfer
+        )
+
+    @on_connection_thread(requires_control=False)
+    async def get_feature_flag_list(self) -> protocol.FeatureFlagListResponse:
+        """Get a list of available feature flags the robot knows.
+
+        .. testcode::
+
+            import anki_vector
+            with anki_vector.Robot() as robot:
+                response = robot.get_feature_flag_list()
+                if response:
+                    for feature in response.list:
+                        print(feature)
+        """
+        get_feature_flag_list = protocol.FeatureFlagListRequest()
+        return await self.conn.grpc_interface.GetFeatureFlagList(get_feature_flag_list)
+
+    @on_connection_thread(requires_control=False)
+    async def get_feature_flag(self, feature_name: str) -> protocol.FeatureFlagResponse:
+        """Get the status of the given feature flag of the robot.
+
+        This let you check if a specific feature is valid and enabled (sufficiently developed to be used).
+
+        .. testcode::
+
+                import anki_vector
+                with anki_vector.Robot(behavior_control_level=None) as robot:
+                    response = robot.get_feature_flag(feature_name='Exploring')
+                    if response:
+                        print(response)
+        """
+        get_feature_flag = protocol.FeatureFlagRequest(feature_name=feature_name)
+        return await self.conn.grpc_interface.GetFeatureFlag(get_feature_flag)
 
     @on_connection_thread(requires_control=False)
     async def get_version_state(self) -> protocol.VersionStateResponse:

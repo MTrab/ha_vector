@@ -1,4 +1,4 @@
-py# Copyright (c) 2018 Anki, Inc.
+# Copyright (c) 2018 Anki, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@ Warning:
     This package requires Python to have the PyOpenGL package installed, along
     with an implementation of GLUT (OpenGL Utility Toolkit).
 
-    To install the Python packages on Mac and Linux do ``python3 -m pip install --user "cyb3r_vector_sdk[3dviewer]"``
+    To install the Python packages on Mac and Linux do ``python3 -m pip install --user "anki_vector[3dviewer]"``
 
-    To install the Python packages on Windows do ``py -3 -m pip install --user "cyb3r_vector_sdk[3dviewer]"``
+    To install the Python packages on Windows do ``py -3 -m pip install --user "anki_vector[3dviewer]"``
 
     On Windows and Linux you must also install freeglut (macOS / OSX has one
     preinstalled).
@@ -41,9 +41,9 @@ import math
 import time
 from typing import List
 
-from anki_vector.faces import Face
-from anki_vector.objects import CustomObject, FixedCustomObject, LightCube, ObservableObject
-from anki_vector import nav_map, util
+from ha_vector.faces import Face
+from ha_vector.objects import CustomObject, FixedCustomObject, LightCube, ObservableObject
+from ha_vector import nav_map, util
 from . import opengl
 
 try:

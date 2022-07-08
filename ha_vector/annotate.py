@@ -43,7 +43,7 @@ import sys
 from typing import Callable, Iterable, Tuple, Union
 
 try:
-    from PIL import Image, ImageDraw
+    from PIL import Image, ImageDraw, ImageFont
 except ImportError:
     sys.exit("Cannot import from PIL: Do `pip3 install --user Pillow` to install")
 except SyntaxError:
@@ -72,6 +72,7 @@ class AnnotationPosition(Enum):
     RIGHT = 2
     TOP = 4
     BOTTOM = 8
+    CENTER = 16
 
     #: Top left position
     TOP_LEFT = TOP | LEFT
@@ -84,6 +85,15 @@ class AnnotationPosition(Enum):
 
     #: Bottom right position
     BOTTOM_RIGHT = BOTTOM | RIGHT
+
+    #: Top center position
+    TOP_CENTER = TOP | CENTER
+
+    #: Middle of the screen position
+    CENTER_CENTER = CENTER | CENTER
+
+    #: Bottom center position
+    BOTTOM_CENTER = BOTTOM | CENTER
 
 
 class ImageText:  # pylint: disable=too-few-public-methods
@@ -137,7 +147,7 @@ class ImageText:  # pylint: disable=too-few-public-methods
     """
 
     def __init__(self, text: str, position: int = AnnotationPosition.BOTTOM_RIGHT, align: str = "left", color: str = "white",
-                 font=None, line_spacing: int = 3, outline_color: str = None, full_outline: bool = True):
+                 font = None, line_spacing: int = 3, outline_color: str = None, full_outline: bool = True):
         self.text = text
         self.position = position
         self.align = align
@@ -156,15 +166,25 @@ class ImageText:  # pylint: disable=too-few-public-methods
         (bx1, by1, bx2, by2) = bounds
         text_width, text_height = draw.textsize(self.text, font=self.font)
 
-        if self.position.value & AnnotationPosition.TOP.value:
-            y = by1
+        if self.position.value == AnnotationPosition.CENTER_CENTER.value:
+            y = by1 + (by2 - by1 - (text_height))/2
+            x = bx1 + (bx2 - bx1 - (text_width))/2
         else:
-            y = by2 - text_height
+            if (self.position.value & AnnotationPosition.LEFT.value or self.position.value & AnnotationPosition.RIGHT.value)\
+                    and self.position.value & AnnotationPosition.CENTER.value:
+                y = by1 + (by2 - by1 - (text_height)) / 2
+            if self.position.value & AnnotationPosition.TOP.value:
+                y = by1
+            else:
+                y = by2 - text_height
 
-        if self.position.value & AnnotationPosition.LEFT.value:
-            x = bx1
-        else:
-            x = bx2 - text_width
+            if (self.position.value & AnnotationPosition.TOP.value or self.position.value & AnnotationPosition.BOTTOM.value)\
+                    and self.position.value & AnnotationPosition.CENTER.value:
+                x = bx1 + (bx2 - bx1 - (text_width)) / 2
+            elif self.position.value & AnnotationPosition.LEFT.value:
+                x = bx1
+            else:
+                x = bx2 - text_width
 
         # helper method for each draw call below
         def _draw_text(pos, color):

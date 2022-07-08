@@ -126,11 +126,6 @@ class ExternalInterfaceStub(object):
                 request_serializer=ha__vector_dot_messaging_dot_messages__pb2.SetFaceToEnrollRequest.SerializeToString,
                 response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.SetFaceToEnrollResponse.FromString,
                 )
-        self.EnrollFace = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/EnrollFace',
-                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.EnrollFaceRequest.SerializeToString,
-                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.EnrollFaceResponse.FromString,
-                )
         self.EnableMarkerDetection = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/EnableMarkerDetection',
                 request_serializer=ha__vector_dot_messaging_dot_messages__pb2.EnableMarkerDetectionRequest.SerializeToString,
@@ -165,11 +160,6 @@ class ExternalInterfaceStub(object):
                 '/Anki.Vector.external_interface.ExternalInterface/CancelActionByIdTag',
                 request_serializer=ha__vector_dot_messaging_dot_messages__pb2.CancelActionByIdTagRequest.SerializeToString,
                 response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.CancelActionByIdTagResponse.FromString,
-                )
-        self.CancelBehavior = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/CancelBehavior',
-                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.CancelBehaviorRequest.SerializeToString,
-                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.CancelBehaviorResponse.FromString,
                 )
         self.GoToPose = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/GoToPose',
@@ -366,11 +356,6 @@ class ExternalInterfaceStub(object):
                 request_serializer=ha__vector_dot_messaging_dot_messages__pb2.CaptureSingleImageRequest.SerializeToString,
                 response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.CaptureSingleImageResponse.FromString,
                 )
-        self.GetCameraConfig = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/GetCameraConfig',
-                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.CameraConfigRequest.SerializeToString,
-                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.CameraConfigResponse.FromString,
-                )
         self.SetEyeColor = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/SetEyeColor',
                 request_serializer=ha__vector_dot_messaging_dot_messages__pb2.SetEyeColorRequest.SerializeToString,
@@ -381,20 +366,20 @@ class ExternalInterfaceStub(object):
                 request_serializer=ha__vector_dot_messaging_dot_nav__map__pb2.NavMapFeedRequest.SerializeToString,
                 response_deserializer=ha__vector_dot_messaging_dot_nav__map__pb2.NavMapFeedResponse.FromString,
                 )
-        self.SetCameraSettings = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/SetCameraSettings',
-                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.SetCameraSettingsRequest.SerializeToString,
-                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.SetCameraSettingsResponse.FromString,
-                )
         self.AppIntent = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/AppIntent',
                 request_serializer=ha__vector_dot_messaging_dot_messages__pb2.AppIntentRequest.SerializeToString,
                 response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.AppIntentResponse.FromString,
                 )
-        self.UpdateSettings = channel.unary_unary(
-                '/Anki.Vector.external_interface.ExternalInterface/UpdateSettings',
-                request_serializer=ha__vector_dot_messaging_dot_settings__pb2.UpdateSettingsRequest.SerializeToString,
-                response_deserializer=ha__vector_dot_messaging_dot_settings__pb2.UpdateSettingsResponse.FromString,
+        self.GetOnboardingState = channel.unary_unary(
+                '/Anki.Vector.external_interface.ExternalInterface/GetOnboardingState',
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.OnboardingStateRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.OnboardingStateResponse.FromString,
+                )
+        self.SendOnboardingInput = channel.unary_unary(
+                '/Anki.Vector.external_interface.ExternalInterface/SendOnboardingInput',
+                request_serializer=ha__vector_dot_messaging_dot_messages__pb2.OnboardingInputRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_messages__pb2.OnboardingInputResponse.FromString,
                 )
         self.GetLatestAttentionTransfer = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/GetLatestAttentionTransfer',
@@ -405,6 +390,11 @@ class ExternalInterfaceStub(object):
                 '/Anki.Vector.external_interface.ExternalInterface/PullJdocs',
                 request_serializer=ha__vector_dot_messaging_dot_settings__pb2.PullJdocsRequest.SerializeToString,
                 response_deserializer=ha__vector_dot_messaging_dot_settings__pb2.PullJdocsResponse.FromString,
+                )
+        self.UpdateSettings = channel.unary_unary(
+                '/Anki.Vector.external_interface.ExternalInterface/UpdateSettings',
+                request_serializer=ha__vector_dot_messaging_dot_settings__pb2.UpdateSettingsRequest.SerializeToString,
+                response_deserializer=ha__vector_dot_messaging_dot_settings__pb2.UpdateSettingsResponse.FromString,
                 )
         self.UpdateAccountSettings = channel.unary_unary(
                 '/Anki.Vector.external_interface.ExternalInterface/UpdateAccountSettings',
@@ -603,13 +593,6 @@ class ExternalInterfaceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def EnrollFace(self, request, context):
-        """Enroll a face. Must be used with SetFaceToEnroll (v1.7)
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def EnableMarkerDetection(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -648,13 +631,6 @@ class ExternalInterfaceServicer(object):
 
     def CancelActionByIdTag(self, request, context):
         """Cancel action by id
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CancelBehavior(self, request, context):
-        """Cancel running SDK Behavior (v1.7)
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -940,13 +916,6 @@ class ExternalInterfaceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetCameraConfig(self, request, context):
-        """Get Vector's camera configuration. (v1.7)
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def SetEyeColor(self, request, context):
         """Set Vector's eye color.
         """
@@ -961,23 +930,20 @@ class ExternalInterfaceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def SetCameraSettings(self, request, context):
-        """Set Vector's camera settings (v1.7)
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def AppIntent(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def UpdateSettings(self, request, context):
-        """Update settings
-        Added by wayne@codaris.com
-        """
+    def GetOnboardingState(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SendOnboardingInput(self, request, context):
+        """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -989,9 +955,13 @@ class ExternalInterfaceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def PullJdocs(self, request, context):
-        """Pull Jdocs
-        Added by wayne@codaris.com
-        """
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdateSettings(self, request, context):
+        """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -1161,11 +1131,6 @@ def add_ExternalInterfaceServicer_to_server(servicer, server):
                     request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.SetFaceToEnrollRequest.FromString,
                     response_serializer=ha__vector_dot_messaging_dot_messages__pb2.SetFaceToEnrollResponse.SerializeToString,
             ),
-            'EnrollFace': grpc.unary_unary_rpc_method_handler(
-                    servicer.EnrollFace,
-                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.EnrollFaceRequest.FromString,
-                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.EnrollFaceResponse.SerializeToString,
-            ),
             'EnableMarkerDetection': grpc.unary_unary_rpc_method_handler(
                     servicer.EnableMarkerDetection,
                     request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.EnableMarkerDetectionRequest.FromString,
@@ -1200,11 +1165,6 @@ def add_ExternalInterfaceServicer_to_server(servicer, server):
                     servicer.CancelActionByIdTag,
                     request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.CancelActionByIdTagRequest.FromString,
                     response_serializer=ha__vector_dot_messaging_dot_messages__pb2.CancelActionByIdTagResponse.SerializeToString,
-            ),
-            'CancelBehavior': grpc.unary_unary_rpc_method_handler(
-                    servicer.CancelBehavior,
-                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.CancelBehaviorRequest.FromString,
-                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.CancelBehaviorResponse.SerializeToString,
             ),
             'GoToPose': grpc.unary_unary_rpc_method_handler(
                     servicer.GoToPose,
@@ -1401,11 +1361,6 @@ def add_ExternalInterfaceServicer_to_server(servicer, server):
                     request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.CaptureSingleImageRequest.FromString,
                     response_serializer=ha__vector_dot_messaging_dot_messages__pb2.CaptureSingleImageResponse.SerializeToString,
             ),
-            'GetCameraConfig': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetCameraConfig,
-                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.CameraConfigRequest.FromString,
-                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.CameraConfigResponse.SerializeToString,
-            ),
             'SetEyeColor': grpc.unary_unary_rpc_method_handler(
                     servicer.SetEyeColor,
                     request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.SetEyeColorRequest.FromString,
@@ -1416,20 +1371,20 @@ def add_ExternalInterfaceServicer_to_server(servicer, server):
                     request_deserializer=ha__vector_dot_messaging_dot_nav__map__pb2.NavMapFeedRequest.FromString,
                     response_serializer=ha__vector_dot_messaging_dot_nav__map__pb2.NavMapFeedResponse.SerializeToString,
             ),
-            'SetCameraSettings': grpc.unary_unary_rpc_method_handler(
-                    servicer.SetCameraSettings,
-                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.SetCameraSettingsRequest.FromString,
-                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.SetCameraSettingsResponse.SerializeToString,
-            ),
             'AppIntent': grpc.unary_unary_rpc_method_handler(
                     servicer.AppIntent,
                     request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.AppIntentRequest.FromString,
                     response_serializer=ha__vector_dot_messaging_dot_messages__pb2.AppIntentResponse.SerializeToString,
             ),
-            'UpdateSettings': grpc.unary_unary_rpc_method_handler(
-                    servicer.UpdateSettings,
-                    request_deserializer=ha__vector_dot_messaging_dot_settings__pb2.UpdateSettingsRequest.FromString,
-                    response_serializer=ha__vector_dot_messaging_dot_settings__pb2.UpdateSettingsResponse.SerializeToString,
+            'GetOnboardingState': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetOnboardingState,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.OnboardingStateRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.OnboardingStateResponse.SerializeToString,
+            ),
+            'SendOnboardingInput': grpc.unary_unary_rpc_method_handler(
+                    servicer.SendOnboardingInput,
+                    request_deserializer=ha__vector_dot_messaging_dot_messages__pb2.OnboardingInputRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_messages__pb2.OnboardingInputResponse.SerializeToString,
             ),
             'GetLatestAttentionTransfer': grpc.unary_unary_rpc_method_handler(
                     servicer.GetLatestAttentionTransfer,
@@ -1440,6 +1395,11 @@ def add_ExternalInterfaceServicer_to_server(servicer, server):
                     servicer.PullJdocs,
                     request_deserializer=ha__vector_dot_messaging_dot_settings__pb2.PullJdocsRequest.FromString,
                     response_serializer=ha__vector_dot_messaging_dot_settings__pb2.PullJdocsResponse.SerializeToString,
+            ),
+            'UpdateSettings': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateSettings,
+                    request_deserializer=ha__vector_dot_messaging_dot_settings__pb2.UpdateSettingsRequest.FromString,
+                    response_serializer=ha__vector_dot_messaging_dot_settings__pb2.UpdateSettingsResponse.SerializeToString,
             ),
             'UpdateAccountSettings': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateAccountSettings,
@@ -1855,23 +1815,6 @@ class ExternalInterface(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def EnrollFace(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/EnrollFace',
-            ha__vector_dot_messaging_dot_messages__pb2.EnrollFaceRequest.SerializeToString,
-            ha__vector_dot_messaging_dot_messages__pb2.EnrollFaceResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
     def EnableMarkerDetection(request,
             target,
             options=(),
@@ -1987,23 +1930,6 @@ class ExternalInterface(object):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/CancelActionByIdTag',
             ha__vector_dot_messaging_dot_messages__pb2.CancelActionByIdTagRequest.SerializeToString,
             ha__vector_dot_messaging_dot_messages__pb2.CancelActionByIdTagResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def CancelBehavior(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/CancelBehavior',
-            ha__vector_dot_messaging_dot_messages__pb2.CancelBehaviorRequest.SerializeToString,
-            ha__vector_dot_messaging_dot_messages__pb2.CancelBehaviorResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2671,23 +2597,6 @@ class ExternalInterface(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetCameraConfig(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/GetCameraConfig',
-            ha__vector_dot_messaging_dot_messages__pb2.CameraConfigRequest.SerializeToString,
-            ha__vector_dot_messaging_dot_messages__pb2.CameraConfigResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
     def SetEyeColor(request,
             target,
             options=(),
@@ -2722,23 +2631,6 @@ class ExternalInterface(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def SetCameraSettings(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/SetCameraSettings',
-            ha__vector_dot_messaging_dot_messages__pb2.SetCameraSettingsRequest.SerializeToString,
-            ha__vector_dot_messaging_dot_messages__pb2.SetCameraSettingsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
     def AppIntent(request,
             target,
             options=(),
@@ -2756,7 +2648,7 @@ class ExternalInterface(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def UpdateSettings(request,
+    def GetOnboardingState(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2766,9 +2658,26 @@ class ExternalInterface(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/UpdateSettings',
-            ha__vector_dot_messaging_dot_settings__pb2.UpdateSettingsRequest.SerializeToString,
-            ha__vector_dot_messaging_dot_settings__pb2.UpdateSettingsResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/GetOnboardingState',
+            ha__vector_dot_messaging_dot_messages__pb2.OnboardingStateRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.OnboardingStateResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SendOnboardingInput(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/SendOnboardingInput',
+            ha__vector_dot_messaging_dot_messages__pb2.OnboardingInputRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_messages__pb2.OnboardingInputResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2803,6 +2712,23 @@ class ExternalInterface(object):
         return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/PullJdocs',
             ha__vector_dot_messaging_dot_settings__pb2.PullJdocsRequest.SerializeToString,
             ha__vector_dot_messaging_dot_settings__pb2.PullJdocsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def UpdateSettings(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/Anki.Vector.external_interface.ExternalInterface/UpdateSettings',
+            ha__vector_dot_messaging_dot_settings__pb2.UpdateSettingsRequest.SerializeToString,
+            ha__vector_dot_messaging_dot_settings__pb2.UpdateSettingsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

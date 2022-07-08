@@ -1,17 +1,22 @@
 import asyncio
 from os import environ
 import aiohttp
+import threading
 
 import ha_vector
-from ha_vector.home_assistant import API
+from ha_vector.setup import VectorSetup
 from ha_vector.robot import AsyncRobot
+from ha_vector.events import Events
+from ha_vector.util import degrees
 
 SETTINGS_DIR = "./.vector"
+
+said_text = False
 
 
 async def main():
     async with aiohttp.ClientSession() as session:
-        vector_api = API(
+        vector_api = VectorSetup(
             environ["EMAIL"],
             environ["PASSWORD"],
             environ["NAME"],
@@ -29,18 +34,18 @@ async def main():
         "guid": vector_api.guid.replace("b'", "").replace("'", ""),
     }
 
-
     robot = AsyncRobot(
         # with Robot(
         environ["SERIAL"],
+        ip_address=environ["IP"],
+        name=environ["NAME"],
+        config=config,
         default_logging=False,
         behavior_control_level=None,
         cache_animation_lists=False,
         enable_face_detection=True,
         estimate_facial_expression=True,
         enable_audio_feed=True,
-        ip=environ["IP"],
-        config=config,
     )
     # robot.conn.request_control()
     # robot.behavior.say_text(

@@ -28,6 +28,7 @@ import logging
 import platform
 import sys
 import threading
+import time
 from typing import Any, Awaitable, Callable, Coroutine, Dict, List
 
 from google.protobuf.text_format import MessageToString
@@ -35,7 +36,6 @@ import grpc
 import aiogrpc
 
 from . import util
-from .escapepod import EscapePod
 from .exceptions import (connection_error,
                          VectorAsyncException,
                          VectorBehaviorControlException,
@@ -46,14 +46,6 @@ from .exceptions import (connection_error,
                          VectorNotFoundException)
 from .messaging import client, protocol
 from .version import __version__
-
-
-class CancelType(Enum):
-    """Enum used to specify cancellation options for behaviors -- internal use only """
-    #: Cancellable as an 'Action'
-    CANCELLABLE_ACTION = 0
-    #: Cancellable as a 'Behavior'
-    CANCELLABLE_BEHAVIOR = 1
 
 
 class ControlPriorityLevel(Enum):
@@ -207,12 +199,13 @@ class Connection:
                                    requires behavior control, or None to decline control.
     """
 
-    def __init__(self, name: str, host: str, cert_file: str, guid: str, escape_pod: bool = False, behavior_control_level: ControlPriorityLevel = ControlPriorityLevel.DEFAULT_PRIORITY):
+    def __init__(self, name: str, host: str, cert_file: str, guid: str, behavior_control_level: ControlPriorityLevel = ControlPriorityLevel.DEFAULT_PRIORITY):
+        if cert_file is None:
+            raise VectorConfigurationException("Must provide a cert file to authenticate to Vector.")
         self._loop: asyncio.BaseEventLoop = None
         self.name = name
         self.host = host
         self.cert_file = cert_file
-        self._escape_pod = escape_pod
         self._interface = None
         self._channel = None
         self._has_control = False
@@ -404,7 +397,7 @@ class Connection:
         if not isinstance(behavior_control_level, ControlPriorityLevel):
             raise TypeError("behavior_control_level must be of type ControlPriorityLevel")
         if self._thread is threading.current_thread():
-            return asyncio.ensure_future(self._request_control(behavior_control_level=behavior_control_level, timeout=timeout))
+            return asyncio.ensure_future(self._request_control(behavior_control_level=behavior_control_level, timeout=timeout), loop=self._loop)
         return self.run_coroutine(self._request_control(behavior_control_level=behavior_control_level, timeout=timeout))
 
     async def _request_control(self, behavior_control_level: ControlPriorityLevel = ControlPriorityLevel.DEFAULT_PRIORITY, timeout: float = 10.0):
@@ -435,7 +428,7 @@ class Connection:
         :param timeout: The time allotted to attempt to release control, in seconds.
         """
         if self._thread is threading.current_thread():
-            return asyncio.ensure_future(self._release_control(timeout=timeout))
+            return asyncio.ensure_future(self._release_control(timeout=timeout), loop=self._loop)
         return self.run_coroutine(self._release_control(timeout=timeout))
 
     async def _release_control(self, timeout: float = 10.0):
@@ -474,7 +467,7 @@ class Connection:
         self._ready_signal.clear()
         self._thread = threading.Thread(target=self._connect, args=(timeout,), daemon=True, name="gRPC Connection Handler Thread")
         self._thread.start()
-        ready = self._ready_signal.wait(timeout=4 * timeout)
+        ready = self._ready_signal.wait(timeout=2 * timeout)
         if not ready:
             raise VectorNotFoundException()
         if hasattr(self._ready_signal, "exception"):
@@ -496,20 +489,9 @@ class Connection:
                 self._control_events = _ControlEventManager(self._loop)
             else:
                 self._control_events = _ControlEventManager(self._loop, priority=self._behavior_control_level)
-
             trusted_certs = None
-            if not self.cert_file is None:
-                with open(self.cert_file, 'rb') as cert:
-                    trusted_certs = cert.read()
-            else:
-                if not self._escape_pod:
-                    raise VectorConfigurationException("Must provide a cert file to authenticate to Vector.")
-
-            if self._escape_pod:
-                if not EscapePod.validate_certificate_name(self.cert_file, self.name):
-                    trusted_certs = EscapePod.get_authentication_certificate(self.host)
-                    self.name = EscapePod.get_certificate_name(trusted_certs)
-                self._guid = EscapePod.authenticate_escape_pod(self.host, self.name, trusted_certs)
+            with open(self.cert_file, 'rb') as cert:
+                trusted_certs = cert.read()
 
             # Pin the robot certificate for opening the channel
             channel_credentials = aiogrpc.ssl_channel_credentials(root_certificates=trusted_certs)
@@ -554,10 +536,6 @@ class Connection:
 
             if self._behavior_control_level:
                 self._loop.run_until_complete(self._request_control(behavior_control_level=self._behavior_control_level, timeout=timeout))
-        except grpc.RpcError as rpc_error:  # pylint: disable=broad-except
-            setattr(self._ready_signal, "exception", connection_error(rpc_error))
-            self._loop.close()
-            return
         except Exception as e:  # pylint: disable=broad-except
             # Propagate the errors to the calling thread
             setattr(self._ready_signal, "exception", e)
@@ -632,21 +610,20 @@ class Connection:
             # Close the connection
             conn.close()
         """
-        try:
-            if self._control_events:
-                self._control_events.shutdown()
-            if self._control_stream_task:
-                self._control_stream_task.cancel()
-                self.run_coroutine(self._control_stream_task).result()
-            self._cancel_active()
-            if self._channel:
-                self.run_coroutine(self._channel.close()).result()
-            self.run_coroutine(self._done_signal.set)
-            self._thread.join(timeout=5)
-        except:
-            pass
-        finally:
-            self._thread = None
+        if self._control_events:
+            self._control_events.shutdown()
+            # need to wait until all Futures were cancled before going on,
+            # otherwise python 3.8+ will raise alot of CancelledErrors and
+            time.sleep(2)
+        if self._control_stream_task:
+            self._control_stream_task.cancel()
+            self.run_coroutine(self._control_stream_task).result()
+        self._cancel_active()
+        if self._channel:
+            self.run_coroutine(self._channel.close()).result()
+        self.run_coroutine(self._done_signal.set)
+        self._thread.join(timeout=5)
+        self._thread = None
 
     def run_soon(self, coro: Awaitable) -> None:
         """Schedules the given awaitable to run on the event loop for the connection thread.
@@ -716,7 +693,7 @@ class Connection:
         return asyncio.run_coroutine_threadsafe(coro, self._loop)
 
 
-def on_connection_thread(log_messaging: bool = True, requires_control: bool = True, is_cancellable: CancelType = None) -> Callable[[Coroutine[util.Component, Any, None]], Any]:
+def on_connection_thread(log_messaging: bool = True, requires_control: bool = True, is_cancellable_behavior=False) -> Callable[[Coroutine[util.Component, Any, None]], Any]:
     """A decorator generator used internally to denote which functions will run on
     the connection thread. This unblocks the caller of the wrapped function
     and allows them to continue running while the messages are being processed.
@@ -733,8 +710,7 @@ def on_connection_thread(log_messaging: bool = True, requires_control: bool = Tr
     :param log_messaging: True if the log output should include the entire message or just the size. Recommended for
         large binary return values.
     :param requires_control: True if the function should wait until behavior control is granted before executing.
-    :param is_cancellable: use a valid enum of :class:`CancelType` to specify the type of cancellation for the
-        function. Defaults to 'None' implying no support for responding to cancellation.
+    :param is_cancellable_behavior: True if the behavior can be cancelled before it has completed.
     :returns: A decorator which has 3 possible returns based on context: the result of the decorated function,
         the :class:`concurrent.futures.Future` which points to the decorated function, or the
         :class:`asyncio.Future` which points to the decorated function.
@@ -797,36 +773,29 @@ def on_connection_thread(log_messaging: bool = True, requires_control: bool = Tr
             # if the call supplies a _return_future parameter then override force_async with that.
             _return_future = kwargs.pop('_return_future', self.force_async)
 
-            action_id = None
-            if is_cancellable == CancelType.CANCELLABLE_ACTION:
-                action_id = self._get_next_action_id()
-                kwargs['_action_id'] = action_id
+            behavior_id = None
+            if is_cancellable_behavior:
+                behavior_id = self._get_next_behavior_id()
+                kwargs['_behavior_id'] = behavior_id
 
             wrapped_coroutine = log_handler(self.conn, func, self.logger, *args, **kwargs)
 
             if threading.current_thread() == self.conn.thread:
                 if self.conn.loop.is_running():
-                    return asyncio.ensure_future(wrapped_coroutine)
+                    return asyncio.ensure_future(wrapped_coroutine, loop=self.conn.loop)
                 raise VectorAsyncException("\n\nThe connection thread loop is not running, but a "
                                            "function '{}' is being invoked on that thread.\n".format(func.__name__ if hasattr(func, "__name__") else func))
             future = asyncio.run_coroutine_threadsafe(wrapped_coroutine, self.conn.loop)
 
-            if is_cancellable == CancelType.CANCELLABLE_ACTION:
-                def user_cancelled_action(fut):
-                    if action_id is None:
+            if is_cancellable_behavior:
+                def user_cancelled(fut):
+                    if behavior_id is None:
                         return
 
                     if fut.cancelled():
-                        self._abort_action(action_id)
+                        self._abort(behavior_id)
 
-                future.add_done_callback(user_cancelled_action)
-
-            if is_cancellable == CancelType.CANCELLABLE_BEHAVIOR:
-                def user_cancelled_behavior(fut):
-                    if fut.cancelled():
-                        self._abort_behavior()
-
-                future.add_done_callback(user_cancelled_behavior)
+                future.add_done_callback(user_cancelled)
 
             if requires_control:
                 self.conn.active_commands.append(future)
