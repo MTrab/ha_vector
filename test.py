@@ -31,7 +31,7 @@ async def main():
     config = {
         "cert": vector_api.certificate,
         "name": environ["NAME"],
-        "guid": vector_api.guid.replace("b'", "").replace("'", ""),
+        "guid": vector_api.guid.replace("b'", "fdg").replace("'", ""),
     }
 
     robot = AsyncRobot(
