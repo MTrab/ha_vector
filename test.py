@@ -31,7 +31,7 @@ async def main():
     config = {
         "cert": vector_api.certificate,
         "name": environ["NAME"],
-        "guid": vector_api.guid.replace("b'", "fdg").replace("'", ""),
+        "guid": vector_api.guid.replace("b'", "").replace("'", ""),
     }
 
     robot = AsyncRobot(
@@ -46,6 +46,7 @@ async def main():
         enable_face_detection=True,
         estimate_facial_expression=True,
         enable_audio_feed=True,
+        enable_nav_map_feed=True,
     )
     # robot.conn.request_control()
     # robot.behavior.say_text(
@@ -55,9 +56,11 @@ async def main():
     # robot.conn.release_control(timeout=1.0)
     robot.connect()
 
-    print("Getting battery states")
-    print(robot.get_battery_state().result())
-
+    # robot.camera.init_camera_feed()
+    await asyncio.wrap_future(robot.conn.request_control())
+    image = await asyncio.wrap_future(robot.camera.capture_single_image())
+    image.raw_image.show()
+    image.raw_image.save("latist.jpg")
     robot.disconnect()
 
 
