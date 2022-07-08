@@ -745,13 +745,6 @@ class Robot:
             _on_connection_thread=True,
         )
 
-        # access the pose to prove it has gotten back from the event stream once
-        try:
-            if not self.pose:
-                pass
-        except VectorPropertyValueNotReadyException as e:
-            raise VectorUnreliableEventStreamException() from e
-
     def disconnect(self) -> None:
         """Close the connection with Vector.
 
